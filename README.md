@@ -1,4 +1,4 @@
-# test-vue-install
+# vue-manga-project
 
 ## Project setup
 ```
