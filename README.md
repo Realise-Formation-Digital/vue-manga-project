@@ -22,3 +22,6 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Docker configuration
+See [here](https://github.com/seanbreckenridge/docker-jikan)
