@@ -3,18 +3,23 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import Mangas from '@/components/Mangas'
 import Home from '@/components/Home'
+import Contact from '@/components/Contact'
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
 const routes = [
   {
-    path: './home',
+    path: '/',
     component: Home
   },
   {
-    path: './mangas',
+    path: '/mangas',
     component: Mangas
+  },
+  { 
+    path: '/contact',
+    component: Contact
   }
 ]
 

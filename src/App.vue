@@ -5,6 +5,7 @@
     <p>
       <router-link to="/">Home</router-link><br>
       <router-link to="/mangas">Mangas</router-link><br>
+      <router-link to="/contact">Drop us a message</router-link>
       <router-view></router-view>
     </p>
   </div>
