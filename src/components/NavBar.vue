@@ -1,54 +1,41 @@
 <template>
-  <v-card class="overflow-hidden">
-    <v-app-bar
-      absolute
-      color="#6A76AB"
-      dark
-      shrink-on-scroll
-      prominent
-      src="https://picsum.photos/1920/1080?random"
-      fade-img-on-scroll
-      scroll-target="#scrolling-techniques-3"
-    >
-      <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-          gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
-        ></v-img>
-      </template>
+  <v-card>
+    <v-toolbar color="cyan" dark flat>
 
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-      <v-app-bar-title>Title</v-app-bar-title>
+      <v-toolbar-title>Welcome To Manga World</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-
       <template v-slot:extension>
-        <v-tabs align-with-title>
-          <v-tab>Tab 1</v-tab>
-          <v-tab>Tab 2</v-tab>
-          <v-tab>Tab 3</v-tab>
+        <v-tabs v-model="tab" align-with-title>
+          <v-tabs-slider color="yellow"></v-tabs-slider>
+
+          <v-tab v-for="item in items" :key="item">
+            {{ item }}
+          </v-tab>
         </v-tabs>
       </template>
-    </v-app-bar>
-    <v-sheet
-      id="scrolling-techniques-3"
-      class="overflow-y-auto"
-      max-height="600"
-    >
-      <v-container style="height: 1000px;"></v-container>
-    </v-sheet>
+    </v-toolbar>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item v-for="item in items" :key="item">
+        <v-card flat>
+          <v-card-text v-text="text"></v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
   </v-card>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      tab: null,
+      items: ["Home Page", "images", "videos", "About Us"],
+      text:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    };
+  },
+};
+</script>
