@@ -1,19 +1,29 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import App from './App.vue'
+import vuetify from '@/plugins/vuetify' // path to vuetify export
+import VueRouter from 'vue-router'
+
 import Mangas from '@/components/Mangas'
 import Home from '@/components/Home'
+
+Vue.config.productionTip = false
+
+new Vue({
+render: h => h(App),
+vuetify
+}).$mount('#app');
+
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
 const routes = [
   {
-    path: './home',
+    path: '/',
     component: Home
   },
   {
-    path: './mangas',
+    path: '/mangas',
     component: Mangas
   }
 ]
