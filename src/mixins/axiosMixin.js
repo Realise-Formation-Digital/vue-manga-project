@@ -1,4 +1,4 @@
-const axiosMixin = {
+/* const axiosMixin = {
     methods: {
         async showChosen(link) {
             try {
@@ -13,3 +13,5 @@ const axiosMixin = {
 }
 
 export default axiosMixin
+
+*/

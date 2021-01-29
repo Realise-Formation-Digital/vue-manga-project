@@ -2,12 +2,16 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>Banque à mangas (je suis le header affiché depuis App.vue)</h1>
-    <p>
+    <br>
       <router-link to="/">Home</router-link><br>
-      <router-link to="/mangas">Mangas</router-link><br>
+      <router-link to="/animes">Animes</router-link>
+      <br>
+      <router-link to="/mangas">Mangas</router-link>
+      <br>
       <router-link to="/contact">Drop us a message</router-link>
+      <br>
+      <hr>
       <router-view></router-view>
-    </p>
   </div>
 </template>
 

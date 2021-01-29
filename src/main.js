@@ -2,12 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import Mangas from '@/components/Mangas'
+import Animes from '@/components/Animes'
 import Home from '@/components/Home'
 import Contact from '@/components/Contact'
 import vuetify from '@/plugins/vuetify.js' // path to vuetify export
-import 'vuetify/dist/vuetify.min.css';
+// import 'vuetify/dist/vuetify.min.css';
 
-Vue.use(Vuetify)
+// Vue.use(Vuetify)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
@@ -19,6 +20,10 @@ const routes = [
   {
     path: '/mangas',
     component: Mangas
+  },
+  {
+    path: '/animes',
+    component: Animes
   },
   { 
     path: '/contact',
