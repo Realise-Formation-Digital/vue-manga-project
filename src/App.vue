@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NavBar/>
-    <img alt="Vue logo" src="./assets/logo.png">
+    <mangas/>
     <HelloWorld msg="Vuetify Manga World"/>
   </div>
 </template>
@@ -9,11 +9,13 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import NavBar from './components/NavBar.vue'
+import mangas from './components/mangas.vue'
 
 export default {
   name: 'App',
   components: {
     NavBar,
+    mangas,
     HelloWorld
   }
 }
