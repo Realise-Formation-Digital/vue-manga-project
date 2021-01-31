@@ -1,15 +1,29 @@
 <template>
-  <div>
-    <h1>Ciao je suis la page Animes</h1>
 
-  </div>
+    <div> <!-- Parent div of the template -->
+        <p>In preparation! Check Manga instead.</p>
+    </div>
 </template>
 
+
 <script>
-export default {
-    name: "Animes"
-}
+  import 'material-design-icons-iconfont/dist/material-design-icons.css' // importing because with CLI no default HTML in /src
+  import axiosMixin from "../mixins/axiosMixin"
+
+  export default {
+    name: "Animes",
+    mixins: [axiosMixin],
+    data () {
+      return {
+        result: [], // the array where the data is stored
+        like: 'LIKE'
+        }
+    }
+  }
+
 </script>
+
+
 
 <style>
 </style>

@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
+import vuetify from '@/plugins/vuetify.js' // path to vuetify export
+
+// Importing parts
+// import Footer from '@components/Footer'.vue
+
+// Importing pages
 import Mangas from '@/components/Mangas'
 import Animes from '@/components/Animes'
 import Home from '@/components/Home'
 import Contact from '@/components/Contact'
-import vuetify from '@/plugins/vuetify.js' // path to vuetify export
+
 // import 'vuetify/dist/vuetify.min.css';
 
 // Vue.use(Vuetify)

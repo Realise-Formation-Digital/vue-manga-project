@@ -1,37 +1,143 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <h1>Banque à mangas (je suis le header affiché depuis App.vue)</h1>
-    <br>
-      <router-link to="/">Home</router-link><br>
-      <router-link to="/animes">Animes</router-link>
-      <br>
-      <router-link to="/mangas">Mangas</router-link>
-      <br>
-      <router-link to="/contact">Drop us a message</router-link>
-      <br>
-      <hr>
+    <img src="./assets/animania2.png" alt="Header with pictures of characters from animes and mangas" style="width: 100%">
+
+      <!-- Nav menu with router-links -->
+
+      <nav class="navbar navbar-expand-lg fixed-top row navtab">
+        <router-link tag="li" class="col nav-tab" class-active="active" to="/">Home</router-link><br>
+        <router-link tag="li" class="col nav-tab" class-active="active" to="/animes">Animes</router-link>
+        <router-link tag="li" class="col nav-tab" class-active="active" to="/mangas">Mangas</router-link>
+        <router-link tag="li" class="col nav-tab" class-active="active" to="/contact">Drop us a message</router-link>
+        <hr>
+      </nav>
+
+      <!-- Components (pages) displayed here -->
       <router-view></router-view>
+
+      <!-- Footer goes here -->
+      <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer from './components/Footer.vue'
 /* import HelloWorld from './components/HelloWorld.vue' */
 export default {
   name: 'App',
   components: {
      /* HelloWorld */
+     Footer
     }
 }
 </script>
 
 <style>
+:root {
+	--color-red: rgb(129, 23, 23);
+	--color-red-hover:  rgb(95, 13, 13);
+}
+
+nav {
+  margin-bottom: 50px;
+}
+
+.nav-tab {
+  background: var(--color-red);
+}
+
+.nav-tab:hover {
+  background: var(--color-red-hover);
+}
+
+.nav-tab:active {
+  background: seashell;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Nunito, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
+
+li {
+  list-style-type: none;  
+}
+
+
+body {
+    font-family: sans-serif;
+    background-color: #2b2b2b;
+    color: white;
+}
+
+div>h2:first-child {
+    margin-top: 40px;
+}
+
+h2 {
+  margin-bottom: 0px;
+}
+
+h2:nth-of-type(2) {
+  font-size: 1.8em;
+}
+
+h2:nth-of-type(3) {
+  font-size: 2.1em;
+  margin-bottom: 25px;
+}
+
+h3 {
+  margin-bottom: 10px;  
+}
+
+.selection__type {
+  margin: 10px auto;
+  padding: 2em;
+  width: 60%;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.selection__type--general {
+  background-color: rgb(119, 119, 119);
+}
+
+.selection__type--genre {
+  background-color: rgb(71, 71, 71);
+}
+
+.selection__instructions {
+  color:rgb(119, 119, 119)
+}
+
+.btn {
+    background: white;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 20px; 
+    margin: 0px 10px 0px 0px;
+}
+
+.btn:hover {
+  background-color: var(--color-red);
+}
+
+.btn--general {
+  background: rgb(88, 88, 88);
+  color: white;
+}
+
+.btn--genre {
+  background: rgb(49, 49, 49);
+  color: white;
+}
+
+
+footer {
+  margin-top: 5%;
+}
+   
 </style>

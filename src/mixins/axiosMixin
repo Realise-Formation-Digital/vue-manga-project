@@ -1,0 +1,25 @@
+// Const for mangas
+// const mangaPopular = ''
+// const mangaFavorite = ''
+ 
+// Const for animes 
+
+// Defining axiosMixin object --> Should the various const be part of it?
+export default {
+    methods: {
+        hello() {
+            console.log("Hello and good job")
+        },
+        async show() {
+            try {
+            const axios = require ('axios')
+            const url = 'https://api.jikan.moe/v3/top/anime/1/bypopularity'
+            const response = await axios.get(url) 
+            this.result = response.data.top
+            console.log("Data fetched and displayed on page");
+            } catch (e) {
+                console.error(e)
+            }
+        }
+    }
+}
