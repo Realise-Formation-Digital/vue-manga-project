@@ -1,4 +1,3 @@
-// Defining axiosMixin object --> Should the various const be part of it?
 export default {
     methods: {
         hello() {

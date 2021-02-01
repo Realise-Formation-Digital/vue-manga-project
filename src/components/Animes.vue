@@ -10,7 +10,11 @@
                 <!-- Buttons which offset the function to display corresponding items fetched from the API -->
                 <!-- Instead of a dozen buttons, v-for based on data -->
                 <!-- And add event listeners ? -->
-                <button @click="show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)" class="btn btn--general">
+                <button 
+                    @click="show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)" 
+                    class="btn btn--general"
+                    v-scroll-to="'#displayGrid'"
+                >
                     Popular
                 </button>
 
@@ -80,14 +84,13 @@
 
 
             <!-- Generation of a grid of cards when pressing any button -->    
-            <v-row>
+            <v-row
+                id="displayGrid">
                 <v-col 
                     cols="12" xs="12" sm="6" md="4" lg="3" 
                     v-for="(anime, i) in result" :key="i"
                 >    
                 <v-card data-app> 
-
-
 
 <!-- POPUP -->
 <v-dialog
@@ -115,15 +118,9 @@
               <div class = "cardText">
                 <b>Type:</b> {{anime.type}}
                 <br>
-                <b>Volumes:</b> {{anime.volumes}}
+                <b>Fans from myanimelist.com:</b> {{anime.members}}
                 <br>
-                <b>Start date:</b> {{anime.start_date}}
-                <br>
-                <b>End date:</b> {{anime.end_date}}
-                <br>
-                <b>Members:</b> {{anime.members}}
-                <br>
-                <b>Score:</b> {{anime.score}}
+                <b>Score:</b> {{anime.score}}/10
                 <br>
                 <a :href= anime.url>Read more</a>
               </div>
@@ -141,7 +138,6 @@
          
                     <!-- Title breaks, fix needed --->
                     <v-card-title>{{ anime.title }}</v-card-title>
-                    <v-card-subtitle>{{ anime.score }}/10</v-card-subtitle> 
                     
                     <!-- 
                     <button @click="makeFavorite">
@@ -158,8 +154,8 @@
 
 <script>
     import 'material-design-icons-iconfont/dist/material-design-icons.css' // importing because with CLI no default HTML in /src
-    import axiosMixin from "../mixins/axiosMixin"
-    import animePathsMixin from "../mixins/animePathsMixin"
+    import axiosMixin from "../mixins/axiosMixin.js"
+    import animePathsMixin from "../mixins/animePathsMixin.js"
 
     export default {
         name: "Mangas",

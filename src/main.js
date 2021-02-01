@@ -6,18 +6,11 @@ import { routes } from './routes'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-// Importing parts
-// import Footer from '@components/Footer'.vue
 
-// Importing pages
-import Mangas from '@/components/Mangas'
-import Animes from '@/components/Animes'
-import Home from '@/components/Home'
-import Contact from '@/components/Contact'
-
-// import 'vuetify/dist/vuetify.min.css';
+const VueScrollTo = require('vue-scrollto')
 
 // Vue.use(Vuetify)
+Vue.use(VueScrollTo)
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
@@ -30,5 +23,6 @@ const router = new VueRouter({
 new Vue({
   render: h => h(App),
   vuetify,
+  axios,
   router: router, // la valeur doit être le nom de la constante de l'objet VueRouter instancié
 }).$mount('#app')
