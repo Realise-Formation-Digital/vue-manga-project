@@ -86,7 +86,7 @@
                     v-for="(anime, i) in result" :key="i"
                 >    
                 <v-card data-app> 
-
+            
 
 
 <!-- POPUP -->

@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Follow us - Get the app- Contact us</h1>
+    <h1>Follow us - Contact us</h1>
   </div>
 </template>
 

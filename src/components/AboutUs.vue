@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>About Us: Elisa, Anton, Chris, Daniel, Dario</h1>
-    <img src="../assets/aboutus.gif" alt="DBZ" >
+    <img src="../assets/aboutus.gif" alt="DBZ">
     
   </div>
 </template>
