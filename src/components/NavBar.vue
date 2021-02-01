@@ -1,8 +1,9 @@
 <template>
   <v-card>
+    <img src="../assets/animania.png" alt="Header with pictures of characters from animes and mangas" style="width: 100%">
         <v-toolbar>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
-          <v-toolbar-title>Welcome to Manga World</v-toolbar-title>
+          <v-toolbar-title>Welcome to Animania</v-toolbar-title>
           <v-spacer></v-spacer>
           <router-link to="/">Home Page</router-link>
           <v-spacer></v-spacer>
