@@ -1,43 +1,60 @@
 
 <template>
    <div>
-<div class ="divv" v-for="(item, index) in table" :key="index" @click="show(item)">
+<!-- <div class ="divv" v-for="(item, index) in table" :key="index" @click="show(item)">
   <img class="image" :src="item.image_url">
   <h4>{{item.title}}</h4>
-</div>
+</div> -->
 
-<div data-app>
+<div class ="divv" v-for="(item, index) in table" :key="index" data-app>
       <v-dialog
         transition="dialog-top-transition"
-        max-width="600"
+        max-width="450"
       >
         <template v-slot:activator="{  on, attrs }">
-        <v-btn
-            color="primary"
+        <v-img
+            class = "image"
+            :src=item.image_url
             v-bind="attrs"
             v-on="on"
-          ></v-btn> 
+          ></v-img> 
         </template>
         <template v-slot:default="dialog">
           <v-card>
             <v-toolbar
               color="primary"
               dark
-            >Opening from the top</v-toolbar>
-            <v-card-text>
-              <div class="text-h2 pa-12">Hello world!</div>
+            >{{item.title}}</v-toolbar>
+            <v-card-text class = "card">
+              <img class = "image2" :src="item.image_url">
+              <div class = "cardText">
+                <b>Type:</b> {{item.type}}
+                <br>
+                <b>Volumes:</b> {{item.volumes}}
+                <br>
+                <b>Start date:</b> {{item.start_date}}
+                <br>
+                <b>End date:</b> {{item.end_date}}
+                <br>
+                <b>Members:</b> {{item.members}}
+                <br>
+                <b>Score:</b> {{item.score}}
+                <br>
+                <a :href= item.url>Read more</a>
+              </div>
             </v-card-text>
-            <v-card-actions class="justify-end">
-              <v-btn
+            <v-card-actions  class="justify-end">
+               <v-btn
                 text
                 @click="dialog.value = false"
-              >Close</v-btn>
+                
+              >Close</v-btn> 
             </v-card-actions>
           </v-card>
         </template>
       </v-dialog>
+      <h4>{{item.title}}</h4>
 </div>
-
 </div>
 </template>
 
@@ -62,8 +79,6 @@ export default {
   methods: {
 async getTable() {
   try{
-
-    
     const axios = require('axios');
 
 
@@ -79,11 +94,11 @@ async getTable() {
   }
 },
 
-show(item) { 
+/* show(item) { 
   this.selectedItem = item;
   alert(this.selectedItem.title)
   //("Name: " + item.name + "\nTagline: " + item.tagline + "\nFirst brewed: " + item.first_brewed + "\nDescription: " + item.description);
-},
+}, */
 
   },
 
@@ -101,7 +116,7 @@ show(item) {
 
 .divv{
     width: 170px;
-    height: 270px;
+    height: 250px;
     vertical-align: top;
     display: inline-block;
     text-align: center;
@@ -123,9 +138,25 @@ show(item) {
     object-fit: contain;
 }
 
+.image2 {
+  float: left;
+  padding: 10px 15px 0 0
+}
+
 * {
   box-sizing: border-box;
 }
 
-</style>
+.card {
+ height: 300px; 
+ display: flex; 
+justify-content: center;
 
+}
+
+.cardText{
+  padding-top: 40px;
+  text-align: left;
+}
+
+</style>

@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <mangas/>
+
+
   </div>
 </template>
 
 <script>
 import mangas from './components/mangas.vue'
-
 export default {
   name: 'App',
   components: {
     mangas
-  }
-  
+},
 }
 </script>
 
