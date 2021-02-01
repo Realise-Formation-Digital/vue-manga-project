@@ -10,6 +10,9 @@
 import Footer from './components/Footer.vue'
 import NavBar from './components/NavBar.vue'
 
+
+
+
 export default {
   name: 'App',
   components: {
@@ -25,6 +28,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #949da5;
+  color: #f6f8fa;
 }
 </style>

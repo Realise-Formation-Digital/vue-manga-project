@@ -157,7 +157,6 @@
 
 
 <script>
-    import 'material-design-icons-iconfont/dist/material-design-icons.css' // importing because with CLI no default HTML in /src
     import axiosMixin from "../mixins/axiosMixin"
     import animePathsMixin from "../mixins/animePathsMixin"
 

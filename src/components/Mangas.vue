@@ -83,7 +83,7 @@ show(item) {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #first {  
-    background-color:rgb(45, 71, 121);
+    background-color:rgb(177, 179, 184);
     color: rgb(225, 235, 255);
 }
 .divv{

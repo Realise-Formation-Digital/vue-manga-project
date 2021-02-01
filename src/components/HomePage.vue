@@ -1,7 +1,7 @@
 <template>
   <div>
     <img src="../assets/theworldo.gif" alt="Dio The World">
-    <img src="../assets/katon.gif" alt="Dio The World">
+    <img src="../assets/katon.gif" alt="Dio The World" style="width: 350px;height:250px;">
     <img src="../assets/finalflash.gif" alt="Dio The World">
     <br>
     <button @click="show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)" class="btn btn--general">
@@ -88,9 +88,8 @@
 </template>
 
 <script>
-    import 'material-design-icons-iconfont/dist/material-design-icons.css' // importing because with CLI no default HTML in /src
-    import axiosMixin from "../mixins/axiosMixin"
-    import animePathsMixin from "../mixins/animePathsMixin"
+    import axiosMixin from "../mixins/axiosMixin.js"
+    import animePathsMixin from "../mixins/animePathsMixin.js"
 
     export default {
         name: "Animes",
