@@ -10,10 +10,14 @@ Vue.use(VueRouter)
 
 import Mangas from './components/Mangas.vue'
 import HomePage from './components/HomePage.vue'
+import AboutUs from './components/AboutUs.vue'
+import Footer from './components/Footer.vue'
 
 const routes = [
     { path: '/', component: HomePage },
-    { path: '/mangas', component: Mangas }
+    { path: '/mangas', component: Mangas },
+    { path: '/aboutus', component: AboutUs },
+    { path: '/footer', component: Footer }
   ]
 
   const router = new VueRouter({
