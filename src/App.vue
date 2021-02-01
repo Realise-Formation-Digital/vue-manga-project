@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/animania2.png" alt="Header with pictures of characters from animes and mangas" style="width: 100%">
+    <img src="./assets/animania.png" alt="Header with pictures of characters from animes and mangas" style="width: 100%">
 
       <!-- Nav menu with router-links -->
-
-      <nav class="navbar navbar-expand-lg fixed-top row navtab">
+<!-- <v-app-bar fixed> -->
+      <nav class="navbar navbar-expand-lg fixed-top row nav-tab">
         <router-link tag="li" class="col nav-tab" class-active="active" to="/">Home</router-link><br>
         <router-link tag="li" class="col nav-tab" class-active="active" to="/animes">Animes</router-link>
         <router-link tag="li" class="col nav-tab" class-active="active" to="/mangas">Mangas</router-link>
         <router-link tag="li" class="col nav-tab" class-active="active" to="/contact">Drop us a message</router-link>
         <hr>
       </nav>
+<!-- </v-app-bar> -->
 
       <!-- Components (pages) displayed here -->
       <router-view></router-view>
@@ -61,6 +62,12 @@ nav {
   text-align: center;
 }
 
+v-app-bar {
+  border: 0px solid black;
+  margin: 0;
+  padding: 0;
+}
+
 li {
   list-style-type: none;  
 }
@@ -77,6 +84,7 @@ div>h2:first-child {
 }
 
 h2 {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
   margin-bottom: 0px;
 }
 
@@ -93,6 +101,7 @@ h3 {
   margin-bottom: 10px;  
 }
 
+/**has to be made true only for bigger screens */
 .selection__type {
   margin: 10px auto;
   padding: 2em;
@@ -118,7 +127,7 @@ h3 {
     color: black;
     padding: 10px 20px;
     border-radius: 20px; 
-    margin: 0px 10px 0px 0px;
+    margin: 1%;
 }
 
 .btn:hover {
@@ -135,9 +144,25 @@ h3 {
   color: white;
 }
 
+.btn--miyazaki {
+  background-image: url('./assets/totoro.jpg');
+  background-size: 100px 50px;
+  text-shadow: 1px 1px 2px black;
+}
+
+.btn--miyazaki:hover {
+  opacity: 0.65;
+}
+
 
 footer {
   margin-top: 5%;
 }
-   
+
+.breakWord {
+  word-break: break-word;
+  -webkit-line-clamp: unset !important;
+  white-space: normal;
+}
+
 </style>

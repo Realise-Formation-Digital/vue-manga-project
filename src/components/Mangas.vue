@@ -1,77 +1,103 @@
 <template>
-
     <div> <!-- Parent div of the template -->
-    <v-container>
-        <h2>BROWSE OUR CATALOG</h2>
-        <h2> MARK YOUR FAVORITES MANGAS</h2>
-        <h2>PREPARE AND EXPORT YOUR READING LIST</h2>
-        <p class="selection__instructions">Click to display the corresponding titles.</p>
+        <v-container>
+            <h2>BROWSE OUR CATALOG</h2>
+            <h2> MARK YOUR FAVORITES MANGAS</h2>
+            <h2>PREPARE AND EXPORT YOUR READING LIST</h2>
+            <p class="selection__instructions">Click to display the corresponding titles.</p>
 
-        <div class="selection__type selection__type--general">
-            <!-- Buttons which offset the function to display corresponding items fetched from the API -->
-            <button @click="show" class="btn btn--general">
-                Popular
-            </button>
+            <div class="selection__type selection__type--general">
+                <!-- Buttons which offset the function to display corresponding items fetched from the API -->
+                <button @click="show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)" class="btn btn--general">
+                    Popular
+                </button>
 
-            <button @click="show" class="btn btn--general">
-                Upcoming
-            </button>
+                <button @click="show('https://api.jikan.moe/v3/top/anime/1/favorite', true)" class="btn btn--general">
+                    Community's favourites
+                </button>
 
-            <button @click="show" class="btn btn--general">
-                Community's favourites
-            </button>
-        </div>
+                <button @click="show('https://api.jikan.moe/v3/top/anime/1/upcoming', true)" class="btn btn--general">
+                    Upcoming
+                </button>
+            </div>
 
-        <div class="selection__type selection__type--genre">
-            <h3>SELECTION BY GENRE</h3>
+            <div class="selection__type selection__type--genre">
+                <h3>SELECTION BY GENRE</h3>
 
-            <button @click="show" class="btn btn--genre">
-                Action
-            </button>
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/1', 0)" class="btn btn--genre">
+                    Action
+                </button>
 
-            <button @click="show" class="btn btn--genre">
-                Adventure
-            </button>
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/2', 0)" class="btn btn--genre">
+                    Adventure
+                </button>
 
-            <button @click="show" class="btn btn--genre">
-                Drama
-            </button>
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/8', 0)" class="btn btn--genre">
+                    Drama
+                </button>
 
-            <button @click="show" class="btn btn--genre">
-                Ecchi
-            </button>
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/9', 0)" class="btn btn--genre">
+                    Ecchi
+                </button>
 
-            <button @click="show" class="btn btn--genre">
-                Fantasy
-            </button>
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/10', 0)" class="btn btn--genre">
+                    Fantasy
+                </button>
 
-            <button @click="show" class="btn btn--genre">
-                Game
-            </button>
-        </div>
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/11', 0)" class="btn btn--genre">
+                    Game
+                </button>
 
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/14', 0)" class="btn btn--genre">
+                    Horror
+                </button>
 
-        <!-- Generation of a grid of cards when pressing any button -->    
-        <v-row>
-            <v-col cols="12" xs="12" sm="6" md="4" lg="3" v-for="(anime, i) in result" :key="i">    
-                <v-card width="250px">
-                    
-                    <!-- Title breaks, fix needed --->
-                    <v-card-title>#{{ anime.rank }} {{ anime.title }}</v-card-title>
-                    <v-card-subtitle>{{ anime.score }}/10</v-card-subtitle>
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/16', 0)" class="btn btn--genre">
+                    Magic
+                </button>
+
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/18', 0)" class="btn btn--genre">
+                    Mecha
+                </button>
+
+                <button @click="miyazaki" class="btn btn--genre btn--miyazaki">
+                    Miyazaki
+                </button>
+
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/19', 0)" class="btn btn--genre">
+                    Music
+                </button>
+
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/22', 0)" class="btn btn--genre">
+                    Romance
+                </button>
+
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/24', 0)" class="btn btn--genre">
+                    Sci-Fi
+                </button>
+            </div>
+
+            <!-- Generation of a grid of cards when pressing any button -->    
+            <v-row>
+                <v-col 
+                    cols="12" xs="12" sm="6" md="4" lg="3" 
+                    v-for="(anime, i) in result" :key="i"
+                >    
+                <v-card> 
                     <v-img :src="anime.image_url" alt="anime.title" height="250px"></v-img>
+                    <!-- Title breaks, fix needed --->
+                    <v-card-title>{{ anime.title }}</v-card-title>
+                    <v-card-subtitle>{{ anime.score }}/10</v-card-subtitle> 
                     
-                    <!-- Icon which allows to make an item a favorite -->
+                    <!-- 
                     <button @click="makeFavorite">
-                        {{ like }}
-                    </button>
+                            {{ like }} 
+                        </button> -->
 
-                    <br> 
-
-                </v-card>
-            </v-col>
-        </v-row>
-    </v-container>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-container>
     </div>
 </template>
 
