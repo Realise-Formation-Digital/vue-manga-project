@@ -1,113 +1,40 @@
 <template>
-   <div>
-<div class ="divv" v-for="(item, index) in table" :key="index" @click="show(item)">
-  <img class="image" :src="item.image_url">
-  <h4>{{item.title}}</h4>
-</div>
 
-<div data-app>
-      <v-dialog
-        transition="dialog-top-transition"
-        max-width="600"
-      >
-        <template v-slot:activator="{  on, attrs }">
-        <v-btn
-            color="primary"
-            v-bind="attrs"
-            v-on="on"
-          ></v-btn> 
-        </template>
-        <template v-slot:default="dialog">
-          <v-card>
-            <v-toolbar
-              color="primary"
-              dark
-            >Opening from the top</v-toolbar>
-            <v-card-text>
-              <div class="text-h2 pa-12">Hello world!</div>
-            </v-card-text>
-            <v-card-actions class="justify-end">
-              <v-btn
-                text
-                @click="dialog.value = false"
-              >Close</v-btn>
-            </v-card-actions>
-          </v-card>
-        </template>
-      </v-dialog>
-</div>
+    <div> <!-- Parent div of the template -->
+        <p>In preparation! Check Manga instead.</p>
 
-</div>
+
+            <!-- V-for to generate the general buttons -->
+            <v-row> 
+                <v-col 
+                    v-for="(item, index) in result" :key="index">    
+                    <button @click="show(this.url, true)" class="btn btn--genre">
+                        {{ name }}
+                    </button> 
+                </v-col>
+            </v-row>
+
+    </div>
 </template>
 
+
 <script>
-// Make a request for a user with a given ID
-export default {
-  name: 'Mangas',
-  props: {
-    messageToShow: Object
-  },
-  async mounted(){
-    this.table = this.getTable()
-  },
-  data() {
-    return {
-      table: [],
-      selectedItem: null,
-      dialog: false
+  import 'material-design-icons-iconfont/dist/material-design-icons.css' // importing because with CLI no default HTML in /src
+  import axiosMixin from "../mixins/axiosMixin"
+  import animePathsMixin from "../mixins/animePathsMixin"
+  export default {
+    name: "Animes",
+    mixins: [axiosMixin, animePathsMixin],
+    data () {
+      return {
+        result: [], // the array where the data is stored
+        like: 'LIKE'
+        }
     }
-  },
-  methods: {
-async getTable() {
-  try{
-    
-    const axios = require('axios');
-//axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-//, {headers: {"Access-Control-Allow-Origin": "*"}}
-    const result = await axios.get("https://api.jikan.moe/v3/top/manga/1/bypopularity");
-    console.log(result.data);
-    this.table = result.data.top
-  }catch(e) {
-    console.log("error")
   }
-},
-show(item) { 
-  this.selectedItem = item;
-  alert(this.selectedItem.title)
-  //("Name: " + item.name + "\nTagline: " + item.tagline + "\nFirst brewed: " + item.first_brewed + "\nDescription: " + item.description);
-},
-  },
-} 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-#first {  
-    background-color:rgb(45, 71, 121);
-    color: rgb(225, 235, 255);
-}
-.divv{
-    width: 170px;
-    height: 270px;
-    vertical-align: top;
-    display: inline-block;
-    text-align: center;
-    border: 1px solid lightgray;
-  
-    cursor: pointer;
-}
-.divv:hover {
-  border: 1px solid rgb(0, 0, 0);
-}
-.image {
-    height: 200px;
-    vertical-align: top;
-    display: inline-block;
-    text-align: center;
-    border-radius: 3px;
-    object-fit: contain;
-}
-* {
-  box-sizing: border-box;
-}
+
+
+<style>
 </style>

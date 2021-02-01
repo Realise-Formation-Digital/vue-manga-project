@@ -8,7 +8,9 @@
           <v-spacer></v-spacer>
           <router-link to="/mangas">Mangas</router-link>
           <v-spacer></v-spacer>
-          <router-link to="/AboutUs">About Us</router-link>
+          <router-link to="/animes">Animes</router-link>
+          <v-spacer></v-spacer>
+          <router-link to="/aboutus">About Us</router-link>
         </v-toolbar>
   </v-card>
 </template>
