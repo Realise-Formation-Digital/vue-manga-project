@@ -43,7 +43,7 @@
 <script>
 // Make a request for a user with a given ID
 export default {
-  name: 'mangas',
+  name: 'Mangas',
   props: {
     messageToShow: Object
   },
