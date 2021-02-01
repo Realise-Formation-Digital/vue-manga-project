@@ -34,7 +34,9 @@
                 <br>
                 <a 
                     :href= anime.url>
-                    Read more
+                    <button>
+                        Read more
+                    </button>
                 </a>
                 </div>
             </v-card-text>
@@ -43,10 +45,12 @@
                 class="justify-end"
                 >
                 <v-btn
-                text
-                @click="dialog.value = false"
+                    class="btn btn-outline-warning"
+                    text
+                    @click="dialog.value = false"
+                    @keydown.esc="dialog.value = false"
                 >
-                Close
+                    CLICK OR PRESS 'ESC' TO CLOSE
                 </v-btn> 
             </v-card-actions>
             </v-card>
