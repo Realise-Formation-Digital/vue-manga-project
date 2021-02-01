@@ -1,7 +1,25 @@
 <template>
-  <div class="hello">
-    <h1>Follow us - Contact us</h1>
-  </div>
+   <v-footer
+    color="primary lighten-1"
+    padless
+  >
+    <v-row
+      justify="center"
+      no-gutters
+    >
+      <v-btn
+        v-for="link in links"
+        :key="link"
+        color="white"
+        text
+        rounded
+        class="my-2"
+      >
+        {{ link }}
+      </v-btn>
+     
+    </v-row>
+  </v-footer>
 </template>
 
 <script>
@@ -10,7 +28,19 @@ export default {
   props: {
     msg: String,
   },
+  data: () => ({
+      links: [
+        'Home Page',
+        'Mangas',
+        'Anime',
+        'Services',
+        'Blog',
+        'Contact Us',
+      ],
+    }),
 };
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
