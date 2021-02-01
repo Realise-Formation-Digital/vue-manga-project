@@ -1,14 +1,35 @@
+import Axios from '../lib/axios.js'
+
+
 // Defining axiosMixin object --> Should the various const be part of it?
 export default {
     methods: {
         hello() {
             console.log("Hello and good job")
         },
-        async show(url, top) {
+        async show(top, i, type) {
             try {
-            const axios = require ('axios')
-            const response = await axios.get(url) 
+                let result = null
+                let resultPretty = []
+            const url = "https://api.jikan.moe/v3/top/" + type + "/" + i
+            //const axios = require ('axios')
+            //const response = await axios.get(url)
+            result = await Axios.get(url);
+            if (result.status !== 200) throw new Error("Data not found")
+            result.anime.map((anime) => {
+                let objectToPush = {
+                    name: anime.name,
+                    description: anime.synopsys || null,
+                    image: anime.image_url
+                }
+
+                resultPretty.push(objectToPush)
+            })
+            
+            this.result = resultPretty
+
             top === true ? this.result = response.data.top : this.result = response.data.anime
+
             console.log("Data fetched and displayed on page");
             } catch (e) {
                 console.error(e)

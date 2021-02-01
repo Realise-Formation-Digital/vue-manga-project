@@ -6,7 +6,12 @@
             <h2>PREPARE AND EXPORT YOUR READING LIST</h2>
             <p class="selection__instructions">Click to display the corresponding titles.</p>
 
-            <div class="selection__type selection__type--general">
+<div>
+    <button @click="type=anime">Anime</button>
+    <button>Manga</button>
+</div>
+
+            <div v-if="type === 'anime'" class="selection__type selection__type--general">
                 <!-- Buttons which offset the function to display corresponding items fetched from the API -->
                 <!-- Instead of a dozen buttons, v-for based on data -->
                 <!-- And add event listeners ? -->
@@ -23,10 +28,15 @@
                 </button>
             </div>
 
-            <div class="selection__type selection__type--genre">
-                <h3>SELECTION BY GENRE</h3>
+            <div v-else-if="type === 'manga'"></div>
 
-                <!-- Instead of a dozen buttons, v-for based on data -->
+            <div class="selection__type selection__type--genre" v-for="(anime, i) in result" :key="i">
+                <h3>SELECTION BY GENRE</h3>
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/i', 0)" class="btn btn--genre">
+                    Action
+                </button>
+
+<!-- 
                 <button @click="show('https://api.jikan.moe/v3/genre/anime/1', 0)" class="btn btn--genre">
                     Action
                 </button>
@@ -73,7 +83,7 @@
 
                 <button @click="show('https://api.jikan.moe/v3/genre/anime/24', 0)" class="btn btn--genre">
                     Sci-Fi
-                </button>
+                </button>  -->
             </div>
 
 
@@ -167,13 +177,23 @@
         data () {
             return {
                 result: [], // the array where the data is stored
-                like: 'LIKE'
+                like: 'LIKE',
+                type: null,
             }
         },
         methods: {
             makeFavorite () {
                 console.log("New favorite added")
                 this.like = 'LIKED'
+            },
+            showDialog() {
+
+            },
+            hideDialog() {
+
+            },
+            changeType (type) {
+                this.type = type
             }
         }
     }
