@@ -78,14 +78,67 @@
 
 
 
+
             <!-- Generation of a grid of cards when pressing any button -->    
             <v-row>
                 <v-col 
                     cols="12" xs="12" sm="6" md="4" lg="3" 
                     v-for="(anime, i) in result" :key="i"
                 >    
-                <v-card> 
-                    <v-img :src="anime.image_url" alt="anime.title" height="250px"></v-img>
+                <v-card data-app> 
+
+
+
+<!-- POPUP -->
+<v-dialog
+        transition="dialog-top-transition"
+        max-width="450"
+      >
+        <template v-slot:activator="{  on, attrs }">
+        <v-img
+
+            :src="anime.image_url"
+            alt="anime.title"
+            height="250px"
+            v-bind="attrs"
+            v-on="on"
+          ></v-img> 
+        </template>
+        <template v-slot:default="dialog">
+          <v-card>
+            <v-toolbar
+              color="primary"
+              dark
+            >{{anime.title}}</v-toolbar>
+            <v-card-text class = "card">
+              <img class = "image2" :src="anime.image_url">
+              <div class = "cardText">
+                <b>Type:</b> {{anime.type}}
+                <br>
+                <b>Volumes:</b> {{anime.volumes}}
+                <br>
+                <b>Start date:</b> {{anime.start_date}}
+                <br>
+                <b>End date:</b> {{anime.end_date}}
+                <br>
+                <b>Members:</b> {{anime.members}}
+                <br>
+                <b>Score:</b> {{anime.score}}
+                <br>
+                <a :href= anime.url>Read more</a>
+              </div>
+            </v-card-text>
+            <v-card-actions  class="justify-end">
+               <v-btn
+                text
+                @click="dialog.value = false"
+                
+              >Close</v-btn> 
+            </v-card-actions>
+          </v-card>
+        </template>
+      </v-dialog>
+         
                     <!-- Title breaks, fix needed --->
                     <v-card-title>{{ anime.title }}</v-card-title>
                     <v-card-subtitle>{{ anime.score }}/10</v-card-subtitle> 
@@ -109,7 +162,7 @@
     import animePathsMixin from "../mixins/animePathsMixin"
 
     export default {
-        name: "Animes",
+        name: "Mangas",
         mixins: [axiosMixin, animePathsMixin],
         data () {
             return {
@@ -130,4 +183,33 @@
 
 
 <style>
+
+.image {
+    height: 200px;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    border-radius: 3px;
+    object-fit: contain;
+}
+
+.image2 {
+  float: left;
+  padding: 10px 15px 0 0
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.card {
+ height: 300px; 
+ display: flex; 
+justify-content: center;
+}
+
+.cardText{
+  padding-top: 40px;
+  text-align: left;
+}
 </style>

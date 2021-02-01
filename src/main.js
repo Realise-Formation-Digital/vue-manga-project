@@ -3,10 +3,22 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from '@/plugins/vuetify.js' // path to vuetify export
 import { routes } from './routes'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+// Importing parts
+// import Footer from '@components/Footer'.vue
+
+// Importing pages
+import Mangas from '@/components/Mangas'
+import Animes from '@/components/Animes'
+import Home from '@/components/Home'
+import Contact from '@/components/Contact'
 
 // import 'vuetify/dist/vuetify.min.css';
 
 // Vue.use(Vuetify)
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
