@@ -1,9 +1,3 @@
-// Const for mangas
-// const mangaPopular = ''
-// const mangaFavorite = ''
- 
-// Const for animes 
-
 // Defining axiosMixin object --> Should the various const be part of it?
 export default {
     methods: {

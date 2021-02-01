@@ -8,6 +8,8 @@
 
             <div class="selection__type selection__type--general">
                 <!-- Buttons which offset the function to display corresponding items fetched from the API -->
+                <!-- Instead of a dozen buttons, v-for based on data -->
+                <!-- And add event listeners ? -->
                 <button @click="show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)" class="btn btn--general">
                     Popular
                 </button>
@@ -24,6 +26,7 @@
             <div class="selection__type selection__type--genre">
                 <h3>SELECTION BY GENRE</h3>
 
+                <!-- Instead of a dozen buttons, v-for based on data -->
                 <button @click="show('https://api.jikan.moe/v3/genre/anime/1', 0)" class="btn btn--genre">
                     Action
                 </button>
@@ -34,10 +37,6 @@
 
                 <button @click="show('https://api.jikan.moe/v3/genre/anime/8', 0)" class="btn btn--genre">
                     Drama
-                </button>
-
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/9', 0)" class="btn btn--genre">
-                    Ecchi
                 </button>
 
                 <button @click="show('https://api.jikan.moe/v3/genre/anime/10', 0)" class="btn btn--genre">
@@ -77,6 +76,9 @@
                 </button>
             </div>
 
+
+
+
             <!-- Generation of a grid of cards when pressing any button -->    
             <v-row>
                 <v-col 
@@ -105,10 +107,11 @@
 <script>
     import 'material-design-icons-iconfont/dist/material-design-icons.css' // importing because with CLI no default HTML in /src
     import axiosMixin from "../mixins/axiosMixin"
+    import animePathsMixin from "../mixins/animePathsMixin"
 
     export default {
         name: "Mangas",
-        mixins: [axiosMixin],
+        mixins: [axiosMixin, animePathsMixin],
         data () {
             return {
                 result: [], // the array where the data is stored

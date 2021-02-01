@@ -4,7 +4,7 @@
       class="text-center"
       cols="12"
     >
-      {{ new Date().getFullYear() }} — <strong>Made with love by DECAD</strong>
+      {{ new Date().getFullYear() }} — <strong>Powered by Jikan API</strong>
     </v-col>
   </v-footer>
 </template>
