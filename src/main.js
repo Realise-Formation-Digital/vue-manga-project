@@ -2,6 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from '@/plugins/vuetify.js' // path to vuetify export
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+
 
 // Importing parts
 // import Footer from '@components/Footer'.vue
@@ -15,6 +19,7 @@ import Contact from '@/components/Contact'
 // import 'vuetify/dist/vuetify.min.css';
 
 // Vue.use(Vuetify)
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
