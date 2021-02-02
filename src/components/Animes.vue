@@ -96,14 +96,13 @@
 
 
             <!-- Generation of a grid of cards when pressing any button -->    
-            <v-row>
+            <v-row
+                id="displayGrid">
                 <v-col 
                     cols="12" xs="12" sm="6" md="4" lg="3" 
                     v-for="(item, i) in table" :key="i"
                 >    
                 <v-card data-app> 
-
-
 
 <!-- POPUP -->
 <v-dialog
@@ -174,8 +173,8 @@
 
 <script>
     import 'material-design-icons-iconfont/dist/material-design-icons.css' // importing because with CLI no default HTML in /src
-    import axiosMixin from "../mixins/axiosMixin"
-    import animePathsMixin from "../mixins/animePathsMixin"
+    import axiosMixin from "../mixins/axiosMixin.js"
+    import animePathsMixin from "../mixins/animePathsMixin.js"
 
     export default {
         name: "Mangas",

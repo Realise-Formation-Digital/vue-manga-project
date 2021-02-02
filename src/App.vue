@@ -23,11 +23,9 @@
 
 <script>
 import Footer from './components/Footer.vue'
-/* import HelloWorld from './components/HelloWorld.vue' */
 export default {
   name: 'App',
   components: {
-     /* HelloWorld */
      Footer
     }
 }
