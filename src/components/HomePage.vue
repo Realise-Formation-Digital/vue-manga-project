@@ -31,7 +31,7 @@
         class="d-flex child-flex"
         cols="4"
       >
-        <v-img :src="item.src" aspect-ratio="1" class="grey lighten-2">
+        <v-img :src="item.src" aspect-ratio="2" class="grey lighten-2">
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">
               <v-progress-circular
@@ -55,12 +55,7 @@
 </template>
 
 <script>
-import axiosMixin from "../mixins/axiosMixin.js";
-import animePathsMixin from "../mixins/animePathsMixin.js";
-
 export default {
-  name: "Mangas",
-  mixins: [axiosMixin, animePathsMixin],
   data() {
     return {
 
@@ -84,6 +79,8 @@ export default {
           src: "test",
         },
       ],
+
+    
 
     };
   },

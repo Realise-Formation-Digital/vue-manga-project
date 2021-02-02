@@ -97,33 +97,8 @@
    methods: {
     showAlert (msg) {
       this.message = msg;
-      
-      // let timer = this.showAlert.timer
       console.log("Message Sent")
-      /*
-      if (timer) {
-        clearTimeout(timer)
-      }
-      this.showAlert.timer = setTimeout(() => {
-          this.type = null
-      }, 3000)
       
-      this.elapse = 1 
-      let t = this.showAlert.t
-      if (t) {
-        clearInterval(t)
-      }
-      
-      this.showAlert.t = setInterval(() => {
-        if (this.elapse === 3) {
-          this.elapse = 0
-          clearInterval(this.showAlert.t)
-        }
-        else {
-          this.elapse++
-        }
-      }, 1000)
-      */
     }
   }
 }
