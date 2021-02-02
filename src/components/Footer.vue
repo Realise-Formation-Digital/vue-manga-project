@@ -33,8 +33,6 @@ export default {
         'Home Page',
         'Mangas',
         'Anime',
-        'Services',
-        'Blog',
         'Contact Us',
       ],
     }),
