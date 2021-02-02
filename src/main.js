@@ -13,24 +13,29 @@ Vue.use(VueRouter)
 import HomePage from './components/HomePage.vue'
 import AboutUs from './components/AboutUs.vue'
 import Footer from './components/Footer.vue'
+import Animes from './components/Animes.vue'
 
 const routes = [
-    { path: '/', component: HomePage },
-    { path: '/aboutus', component: AboutUs },
-    { path: '/footer', component: Footer }
-  ]
+  { path: '/', component: HomePage },
+  { path: '/aboutus', component: AboutUs },
+  { path: '/footer', component: Footer },
+  { path: '/animes', component: Animes }
+]
 
-  const router = new VueRouter({
-    routes: routes // short for `routes: routes`
-  })
+const router = new VueRouter({
+  routes: routes // short for `routes: routes`
+})
+
+
+
 
 
 new Vue({
-    // root node
+  // root node
   el: "#app",
-    axios,
-    VueAxios,
-    router,
-render: h => h(App),
-vuetify
+  axios,
+  VueAxios,
+  router,
+  render: h => h(App),
+  vuetify
 }).$mount('#app');

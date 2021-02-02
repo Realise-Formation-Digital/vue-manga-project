@@ -67,7 +67,7 @@
             ></v-text-field>
           </v-col>
 
-          <v-btn color="light" @click="showAlert('Message Sent')">Submit</v-btn>
+          <v-btn color="light" @click="showAlert('Your message has been sent successfully, thank you')">Submit</v-btn>
           <v-alert v-if="message">
             {{ message }}
           </v-alert>
@@ -97,7 +97,7 @@
    methods: {
     showAlert (msg) {
       this.message = msg;
-      console.log("Message Sent")
+      console.log("Your message has been sent successfully, thank you")
       
     }
   }

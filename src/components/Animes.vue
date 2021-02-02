@@ -161,12 +161,9 @@
 
 
 <script>
-import "material-design-icons-iconfont/dist/material-design-icons.css"; // importing because with CLI no default HTML in /src
-import axiosMixin from "../mixins/axiosMixin";
-import animePathsMixin from "../mixins/animePathsMixin";
+
 export default {
-  name: "Mangas",
-  mixins: [axiosMixin, animePathsMixin],
+  name: "Animes",
   data() {
     return {
       table: [], // data from api
@@ -213,30 +210,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.image {
-  height: 200px;
-  vertical-align: top;
-  display: inline-block;
-  text-align: center;
-  border-radius: 3px;
-  object-fit: contain;
-}
-.image2 {
-  float: left;
-  padding: 10px 15px 0 0;
-}
-* {
-  box-sizing: border-box;
-}
-.card {
-  height: 400px;
-  display: flex;
-  justify-content: center;
-}
-.cardText {
-  padding-top: 8px;
-  text-align: left;
-}
-</style>
