@@ -1,20 +1,47 @@
+import Axios from '../lib/axios.js'
+
+
 // Defining axiosMixin object --> Should the various const be part of it?
 export default {
     methods: {
         hello() {
             console.log("Hello and good job")
         },
-        async show(url, top) {
+        async show(filter, type, i, page) {
             try {
+            //let result = []
+ //               let resultPretty = []
+            console.log(type, i)
+            const url = "https://api.jikan.moe/v3/" + filter + "/" + type + "/" + i + "/" + page
+            console.log(url)
             const axios = require ('axios')
-            const response = await axios.get(url) 
-            top === true ? this.result = response.data.top : this.result = response.data.anime
+            const result = await axios.get(url)
+         /*    if (result.status !== 200) throw new Error("Data not found")
+            result.anime.map((anime) => {
+                let objectToPush = {
+                    Title: anime.title,
+                    description: anime.synopsys || null,
+                    image: anime.image_url
+                }
+
+                resultPretty.push(objectToPush)
+            }) */
+            console.log(result)
+            console.log(type)
+            console.log(result.data[type])
+            if(filter === 'genre'){
+                this.table = result.data[type]
+            } else {this.table = result.data[filter]}
+            
+            console.log(this.table)
+          //  top === true ? this.result = response.data.top : this.result = response.data.anime
+
             console.log("Data fetched and displayed on page");
             } catch (e) {
                 console.error(e)
             }
         },
-        async miyazaki() {
+/*         async miyazaki() {
             try {
             const axios = require ('axios')
             const response = await axios.get('https://api.jikan.moe/v3/person/1870') 
@@ -23,6 +50,6 @@ export default {
             } catch (e) {
                 console.error(e)
             }
-        }
+        } */
     }
 }
