@@ -35,7 +35,6 @@
           <v-col cols="12" md="4">
             <v-text-field
               v-model="firstname"
-              :rules="nameRules"
               :counter="10"
               label="First name"
               required
@@ -45,7 +44,6 @@
           <v-col cols="12" md="4">
             <v-text-field
               v-model="lastname"
-              :rules="nameRules"
               :counter="10"
               label="Last name"
               required
@@ -55,7 +53,6 @@
           <v-col cols="12" md="4">
             <v-text-field
               v-model="email"
-              :rules="emailRules"
               label="E-mail"
               required
             ></v-text-field>
@@ -64,7 +61,6 @@
           <v-col cols="12" md="100">
             <v-text-field
               v-model="lastname"
-              :rules="nameRules"
               :counter="500"
               label="Message"
               required
@@ -85,16 +81,26 @@
 <script>
   export default {
     name: "AboutUs",
-    props: {
+    data() {
+      return{
       msg: String,
-    },
-  }
+      type: String,
+      firstname: String,
+      lastname: String,
+      email: String,
+      valid: Boolean,
+    }
+      
 
-/*   methods: {
+    },
+  
+
+   methods: {
     showAlert (type) {
       this.type = type
       
       let timer = this.showAlert.timer
+      console.log("Message Sent")
       if (timer) {
         clearTimeout(timer)
       }
@@ -119,28 +125,8 @@
       }, 1000)
     }
   }
+}
 
-  */
 
   
 </script>
-
-
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
