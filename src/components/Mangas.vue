@@ -1,7 +1,7 @@
 <template>
   <div> <!-- Parent div of the template -->
 
-    <p>In preparation! Check Manga instead.</p>
+    <p>In preparation! Check Anime instead.</p>
        <!-- V-for to generate the general buttons -->
       <v-row> 
         <v-col 
