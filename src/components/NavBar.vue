@@ -14,10 +14,3 @@
 </template>
 
 
-<script>
-  export default {
-    data: () => ({
-      collapseOnScroll: true,
-    }),
-  }
-</script>
