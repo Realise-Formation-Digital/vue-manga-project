@@ -6,17 +6,11 @@
             <h2>PREPARE AND EXPORT YOUR READING LIST</h2>
             <p class="selection__instructions">Click to display the corresponding titles.</p>
 
-<div class="selection__type selection__type--general">
-    <button class="btn btn--general" @click="type='anime'">Anime</button>
-    <button class="btn btn--general" @click="type='manga'">Manga</button>
-</div>
-
-            <div v-if="type === 'anime'" class="selection__type selection__type--general">
+            <div class="selection__type selection__type--general">
                 <!-- Buttons which offset the function to display corresponding items fetched from the API -->
                 <!-- Instead of a dozen buttons, v-for based on data -->
                 <!-- And add event listeners ? -->
-                <!-- 'https://api.jikan.moe/v3/top/anime/1/bypopularity', -->
-                <button @click="show('top', type, page, 'bypopularity'), filter = sorting" class="btn btn--general">
+                <button @click="show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)" class="btn btn--general">
                     Popular
                 </button>
 
@@ -29,21 +23,11 @@
                 </button>
             </div>
 
-
-            <div v-else-if="type === 'manga'" class="selection__type selection__type--general">
-                <button @click="show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)" class="btn btn--general">
-                    Popular
-                </button>
-            </div>
-
-            <div v-if="type !== null" class="selection__type selection__type--genre">
+            <div class="selection__type selection__type--genre">
                 <h3>SELECTION BY GENRE</h3>
-                <button @click="show('genre', type, 1, page)" class="btn btn--genre">
-                    Action
-                </button>
 
-<!-- 
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/1/1', 0)" class="btn btn--genre">
+                <!-- Instead of a dozen buttons, v-for based on data -->
+                <button @click="show('https://api.jikan.moe/v3/genre/anime/1', 0)" class="btn btn--genre">
                     Action
                 </button>
 
@@ -89,7 +73,7 @@
 
                 <button @click="show('https://api.jikan.moe/v3/genre/anime/24', 0)" class="btn btn--genre">
                     Sci-Fi
-                </button>  -->
+                </button>
             </div>
 
 
@@ -100,7 +84,7 @@
                 id="displayGrid">
                 <v-col 
                     cols="12" xs="12" sm="6" md="4" lg="3" 
-                    v-for="(item, i) in table" :key="i"
+                    v-for="(anime, i) in result" :key="i"
                 >    
                 <v-card data-app> 
 
@@ -112,8 +96,8 @@
         <template v-slot:activator="{  on, attrs }">
         <v-img
 
-            :src="item.image_url"
-            alt="item.title"
+            :src="anime.image_url"
+            alt="anime.title"
             height="250px"
             v-bind="attrs"
             v-on="on"
@@ -124,25 +108,25 @@
             <v-toolbar
               color="primary"
               dark
-            >{{item.title}}</v-toolbar>
+            >{{anime.title}}</v-toolbar>
             <v-card-text class = "card">
-              <img class = "image2" :src="item.image_url">
+              <img class = "image2" :src="anime.image_url">
               <div class = "cardText">
-                <b>Type:</b> {{item.type}}
+                <b>Type:</b> {{anime.type}}
                 <br>
-                <b>Volumes:</b> {{item.volumes}}
+                <b>Volumes:</b> {{anime.volumes}}
                 <br>
-                <b>Start date:</b> {{item.start_date}}
+                <b>Start date:</b> {{anime.start_date}}
                 <br>
-                <b>End date:</b> {{item.end_date}}
+                <b>End date:</b> {{anime.end_date}}
                 <br>
-                <b>Members:</b> {{item.members}}
+                <b>Members:</b> {{anime.members}}
                 <br>
-                <b>Score:</b> {{item.score}}
+                <b>Score:</b> {{anime.score}}
                 <br>
-                <a :href= item.url>Read more</a>
+                <a :href= anime.url>Read more</a>
               </div>
-            </v-card-text> 
+            </v-card-text>
             <v-card-actions  class="justify-end">
                <v-btn
                 text
@@ -155,8 +139,8 @@
       </v-dialog>
          
                     <!-- Title breaks, fix needed --->
-                    <v-card-title>{{ item.title }}</v-card-title>
-                    <v-card-subtitle>{{ item.score }}/10</v-card-subtitle> 
+                    <v-card-title>{{ anime.title }}</v-card-title>
+                    <v-card-subtitle>{{ anime.score }}/10</v-card-subtitle> 
                     
                     <!-- 
                     <button @click="makeFavorite">
@@ -181,25 +165,14 @@
         mixins: [axiosMixin, animePathsMixin],
         data () {
             return {
-                table: [], // the array where the data is stored
-                like: 'LIKE',
-                type: null,
-                page: 1
+                result: [], // the array where the data is stored
+                like: 'LIKE'
             }
         },
         methods: {
             makeFavorite () {
                 console.log("New favorite added")
                 this.like = 'LIKED'
-            },
-            showDialog() {
-console.log('xxd')
-            },
-            hideDialog() {
-
-            },
-            changeType (type) {
-                this.type = type
             }
         }
     }
