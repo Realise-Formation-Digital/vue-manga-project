@@ -1,8 +1,34 @@
 <template>
   <div>
-    <img src="../assets/theworldo.gif" alt="Dio The World">
-    <img src="../assets/katon.gif" alt="Dio The World" style="width: 350px;height:250px;">
-    <img src="../assets/finalflash.gif" alt="Dio The World">
+     <v-row>
+    <v-col
+      v-for="item in items"
+      :key="item.id"
+      class="d-flex child-flex"
+      cols="4"
+    >
+      <v-img
+        :src="item.src"
+        
+        aspect-ratio="1"
+        class="grey lighten-2"
+      >
+        <template v-slot:placeholder>
+          <v-row
+            class="fill-height ma-0"
+            align="center"
+            justify="center"
+          >
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row>
+        </template>
+      </v-img>
+    </v-col>
+  </v-row>
+    
     <br>
     <button @click="show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)" class="btn btn--general">
     Test</button>
@@ -97,7 +123,21 @@
         data () {
             return {
                 result: [], // the array where the data is stored
-                like: 'LIKE'
+                like: 'LIKE',
+                items: [
+                  {
+                    id:1,
+                    src: require ("../assets/theworldo.gif"),
+                  }, 
+                  {
+                    id:2,
+                    src: require ("../assets/finalflash.gif"),
+                  },
+                  {
+                    id:3,
+                    src: require ("../assets/katon.gif"),
+                  },  
+                ]
             }
         },
         methods: {

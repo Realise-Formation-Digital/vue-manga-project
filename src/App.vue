@@ -22,6 +22,7 @@ export default {
 }
 </script>
 
+
 <style>
 :root {
 	--color-red: rgb(129, 23, 23);
