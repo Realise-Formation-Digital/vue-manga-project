@@ -32,6 +32,7 @@ export default {
       links: [
         'Home Page',
         'About Us',
+        'Follow Us'
       ],
     }),
 };

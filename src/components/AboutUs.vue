@@ -67,9 +67,9 @@
             ></v-text-field>
           </v-col>
 
-          <v-btn color="light" @click="showAlert('success')">Submit</v-btn>
-          <v-alert :color="type" icon="check_circle" value="true" v-if="type">
-            Message sent
+          <v-btn color="light" @click="showAlert('Message Sent')">Submit</v-btn>
+          <v-alert v-if="message">
+            {{ message }}
           </v-alert>
         </v-row>
       </v-container>
@@ -83,24 +83,24 @@
     name: "AboutUs",
     data() {
       return{
-      msg: String,
-      type: String,
-      firstname: String,
-      lastname: String,
-      email: String,
-      valid: Boolean,
-    }
-      
-
+        msg: '',
+        type: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        valid: false,
+        message: ''
+      }
     },
   
 
    methods: {
-    showAlert (type) {
-      this.type = type
+    showAlert (msg) {
+      this.message = msg;
       
-      let timer = this.showAlert.timer
+      // let timer = this.showAlert.timer
       console.log("Message Sent")
+      /*
       if (timer) {
         clearTimeout(timer)
       }
@@ -123,6 +123,7 @@
           this.elapse++
         }
       }, 1000)
+      */
     }
   }
 }
