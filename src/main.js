@@ -1,9 +1,6 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import App from './App.vue'
-import vuetify from '@/plugins/vuetify.js' // path to vuetify export
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import vuetify from '@/plugins/vuetify' // path to vuetify export
 
 
 
@@ -43,7 +40,6 @@ const router = new VueRouter({
 })
 
 new Vue({
-  render: h => h(App),
-  vuetify,
-  router: router, // la valeur doit être le nom de la constante de l'objet VueRouter instancié
-}).$mount('#app')
+render: h => h(App),
+vuetify
+}).$mount('#app');
