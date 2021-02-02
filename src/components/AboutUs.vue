@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1>About Us:</h1>
-    <img src="../assets/aboutus.gif" alt="DBZ" />
+    <v-container>
+      <img src="../assets/aboutus.gif" alt="DBZ" />
+    </v-container>
 
     <v-container class="grey lighten-5">
       <v-row no-gutters>
@@ -27,10 +28,8 @@
       </v-row>
     </v-container>
 
-    <h2>Contact Us</h2>
-
     <v-form v-model="valid">
-      <v-container>
+      <v-container>Contact Us:
         <v-row>
           <v-col cols="12" md="4">
             <v-text-field

@@ -24,7 +24,7 @@
     <br />
 
     <div>
-      <iframe src="https://api.jikan.moe/v3/anime/1" width="1500" height="800"></iframe>
+      <iframe src="https://api.jikan.moe/v3/anime/1" width="1450"></iframe>
     </div>
     
 
@@ -52,23 +52,9 @@ export default {
           src: require("../assets/katon.gif"),
         },
       ],
-      items: "https://api.jikan.moe/v3/person/1/pictures",
-      categories: [ 
-                { 
-                    name: 'Popular',
-                    url: 'https://api.jikan.moe/v3/top/anime/1/bypopularity'
-                },
-                {
-                    name: "Community's favourite",
-                    url: 'https://api.jikan.moe/v3/top/anime/1/favorite'
-                },
-                {
-                    name: 'Upcoming',
-                    url: 'https://api.jikan.moe/v3/top/anime/1/upcoming'
-                }
-            ],
     };
   },
 };
 </script>
+
 
