@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from '@/plugins/vuetify' // path to vuetify export
-
-
-
+import VueRouter from 'vue-router'
 // Importing parts
 // import Footer from '@components/Footer'.vue
 
@@ -11,7 +9,8 @@ import vuetify from '@/plugins/vuetify' // path to vuetify export
 import Animes from '@/components/Animes'
 import Home from '@/components/Home'
 import Contact from '@/components/Contact'
-
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 // import 'vuetify/dist/vuetify.min.css';
 
 // Vue.use(Vuetify)
@@ -40,6 +39,7 @@ const router = new VueRouter({
 })
 
 new Vue({
-render: h => h(App),
-vuetify
-}).$mount('#app');
+  render: h => h(App),
+  vuetify,
+  router: router, // la valeur doit être le nom de la constante de l'objet VueRouter instancié
+}).$mount('#app')
