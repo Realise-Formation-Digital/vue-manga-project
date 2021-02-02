@@ -11,7 +11,6 @@ import VueAxios from 'vue-axios'
 // import Footer from '@components/Footer'.vue
 
 // Importing pages
-import Mangas from '@/components/Mangas'
 import Animes from '@/components/Animes'
 import Home from '@/components/Home'
 import Contact from '@/components/Contact'
@@ -27,10 +26,6 @@ const routes = [
   {
     path: '/',
     component: Home
-  },
-  {
-    path: '/mangas',
-    component: Mangas
   },
   {
     path: '/animes',

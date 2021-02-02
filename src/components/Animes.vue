@@ -16,7 +16,7 @@
                 <!-- Instead of a dozen buttons, v-for based on data -->
                 <!-- And add event listeners ? -->
                 <!-- 'https://api.jikan.moe/v3/top/anime/1/bypopularity', -->
-                <button @click="show('top', type, page, 'bypopularity'), filter = sorting" class="btn btn--general">
+                <button @click="show('top', type, page, 'bypopularity'), filter = 'top'" class="btn btn--general">
                     Popular
                 </button>
 
@@ -32,13 +32,13 @@
 
             <div v-else-if="type === 'manga'" class="selection__type selection__type--general">
                 <button @click="show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)" class="btn btn--general">
-                    Popular
+                    
                 </button>
             </div>
 
             <div v-if="type !== null" class="selection__type selection__type--genre">
                 <h3>SELECTION BY GENRE</h3>
-                <button @click="show('genre', type, 1, page)" class="btn btn--genre">
+                <button @click="show('genre', type, 1, page), filter = 'genre'" class="btn btn--genre">
                     Action
                 </button>
 
@@ -108,12 +108,13 @@
 <!-- POPUP -->
 <v-dialog
         transition="dialog-top-transition"
-        max-width="450"
+        max-width="950"
       >
         <template v-slot:activator="{  on, attrs }">
         <v-img
 
             :src="item.image_url"
+            @click="showGenres(item)"
             alt="item.title"
             height="250px"
             v-bind="attrs"
@@ -126,12 +127,13 @@
               color="primary"
               dark
             >{{item.title}}</v-toolbar>
-            <v-card-text class = "card">
+
+            <v-card-text  class = "card">
               <img class = "image2" :src="item.image_url">
-              <div class = "cardText">
+              <div v-if="filter === 'top'" class = "cardText">
                 <b>Type:</b> {{item.type}}
                 <br>
-                <b>Volumes:</b> {{item.volumes}}
+                <b>Episodes:</b> {{item.episodes}}
                 <br>
                 <b>Start date:</b> {{item.start_date}}
                 <br>
@@ -139,11 +141,28 @@
                 <br>
                 <b>Members:</b> {{item.members}}
                 <br>
-                <b>Score:</b> {{item.score}}
+                <b>Score:</b> {{item.score}}/10
+                <br>
+                <a :href= item.url>Read more</a>
+              </div>
+
+              <div v-if="filter === 'genre'" class = "cardText">
+                <b>Type:</b> {{item.type}}
+                <br>
+                <b>Episodes:</b> {{item.episodes}}
+                <br>
+                <b>Members:</b> {{item.members}}
+                <br>
+                <b>Synopsis:</b> {{item.synopsis}}
+                <br>
+                <b >Score:</b> {{item.score}}/10
+                <br>
+                <b @click="showGenres(item)" class ="genres"></b>
                 <br>
                 <a :href= item.url>Read more</a>
               </div>
             </v-card-text> 
+
             <v-card-actions  class="justify-end">
                <v-btn
                 text
@@ -185,7 +204,8 @@
                 table: [], // the array where the data is stored
                 like: 'LIKE',
                 type: null,
-                page: 1
+                filter: null,
+                page: 1,
             }
         },
         methods: {
@@ -194,13 +214,27 @@
                 this.like = 'LIKED'
             },
             showDialog() {
-console.log('xxd')
+console.log(this.genres[0])
             },
             hideDialog() {
 
             },
             changeType (type) {
                 this.type = type
+            },
+            showGenres (item) {     
+                let string = "Genres: "
+                for(let i = 0; i < item.genres.length; i++){
+                string +=  '<a href="' + item.genres[i].url +'">' + item.genres[i].name + ' </a>'
+                }  
+                setTimeout(() => {  
+                    let genreshow = document.getElementsByClassName("genres");
+                    for (let i = 0; i < genreshow.length; i++) {
+                    if (genreshow[i]) {
+                 genreshow[i].innerHTML = string;
+              }
+            }        
+        },  1);
             }
         }
     }
@@ -230,13 +264,13 @@ console.log('xxd')
 }
 
 .card {
- height: 300px; 
+ height: 400px; 
  display: flex; 
 justify-content: center;
 }
 
 .cardText{
-  padding-top: 40px;
+  padding-top: 8px;
   text-align: left;
 }
 </style>
