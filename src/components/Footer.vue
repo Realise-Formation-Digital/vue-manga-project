@@ -31,9 +31,7 @@ export default {
   data: () => ({
       links: [
         'Home Page',
-        'Mangas',
-        'Anime',
-        'Contact Us',
+        'About Us',
       ],
     }),
 };

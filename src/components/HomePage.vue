@@ -45,15 +45,12 @@
     </v-row>
     <br />
 
-    <v-btn
-      depressed
-      elevation="2"
-      raised
-      rounded
-      v-for="category in categorys"
-      :key="category.id"
-      >.category</v-btn
-    >
+    <v-btn block>Mangas</v-btn>
+
+    <v-btn block>Animes</v-btn>
+
+  <br>
+  <br>
   </div>
 </template>
 
@@ -62,10 +59,11 @@ import axiosMixin from "../mixins/axiosMixin.js";
 import animePathsMixin from "../mixins/animePathsMixin.js";
 
 export default {
-  name: "Animes",
+  name: "Mangas",
   mixins: [axiosMixin, animePathsMixin],
   data() {
     return {
+
       items: [
         {
           id: 1,
@@ -83,17 +81,13 @@ export default {
       category: [
         {
           id: 1,
-          src: ("test"),
+          src: "test",
         },
       ],
+
     };
   },
-  methods: {
-    makeFavorite() {
-      console.log("New favorite added");
-      this.like = "LIKED";
-    },
-  },
+  
 };
 </script>
 
