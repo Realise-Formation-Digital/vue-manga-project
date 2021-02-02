@@ -14,94 +14,32 @@
         <button class="btn btn--general" @click="type = 'manga'">Manga</button>
       </div>
 
+      <!-- Hidden if didnt chose anime or manga -->
+      <!-- LOOP NEEDED -->
       <div
-        v-if="type === 'anime'"
+        v-if="type !== null"
         class="selection__type selection__type--general"
       >
         <!-- Buttons which offset the function to display corresponding items fetched from the API -->
-        <!-- Instead of a dozen buttons, v-for based on data -->
-        <!-- And add event listeners ? -->
-        <!-- 'https://api.jikan.moe/v3/top/anime/1/bypopularity', -->
+        <!-- Pass 4 parameters in function show() to create API url.  -->
+        <!-- Change variable "filter" for popup parameters -->
         <button
           @click="show('top', type, page, 'bypopularity'), (filter = 'top')"
           class="btn btn--general"
         >
           Popular
         </button>
-
-        <button
-          @click="show('https://api.jikan.moe/v3/top/anime/1/favorite', true)"
-          class="btn btn--general"
-        >
-          Community's favourites
-        </button>
-
-        <button
-          @click="show('https://api.jikan.moe/v3/top/anime/1/upcoming', true)"
-          class="btn btn--general"
-        >
-          Upcoming
-        </button>
       </div>
 
-      <div
-        v-else-if="type === 'manga'"
-        class="selection__type selection__type--general"
-      >
-        <button
-          @click="
-            show('https://api.jikan.moe/v3/top/anime/1/bypopularity', true)
-          "
-          class="btn btn--general"
-        ></button>
-      </div>
-
+      <!-- Same as above but for genres selection -->
       <div v-if="type !== null" class="selection__type selection__type--genre">
         <h3>SELECTION BY GENRE</h3>
         <button
-          @click="show('genre', type, 1, page), (filter = 'genre')"
+          @click="filter = 'genre', show(filter, type, 1, page)"
           class="btn btn--genre"
         >
           Action
         </button>
-
-        <!-- 
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/1/1', 0)" class="btn btn--genre">
-                    Action
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/2', 0)" class="btn btn--genre">
-                    Adventure
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/8', 0)" class="btn btn--genre">
-                    Drama
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/10', 0)" class="btn btn--genre">
-                    Fantasy
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/11', 0)" class="btn btn--genre">
-                    Game
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/14', 0)" class="btn btn--genre">
-                    Horror
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/16', 0)" class="btn btn--genre">
-                    Magic
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/18', 0)" class="btn btn--genre">
-                    Mecha
-                </button>
-                <button @click="miyazaki" class="btn btn--genre btn--miyazaki">
-                    Miyazaki
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/19', 0)" class="btn btn--genre">
-                    Music
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/22', 0)" class="btn btn--genre">
-                    Romance
-                </button>
-                <button @click="show('https://api.jikan.moe/v3/genre/anime/24', 0)" class="btn btn--genre">
-                    Sci-Fi
-                </button>  -->
       </div>
 
       <!-- Generation of a grid of cards when pressing any button -->
@@ -116,8 +54,8 @@
           :key="i"
         >
           <v-card data-app>
-            <!-- POPUP -->
             <v-dialog transition="dialog-top-transition" max-width="950">
+              <!-- Loop to fill the grid with images from API -->
               <template v-slot:activator="{ on, attrs }">
                 <v-img
                   :src="item.image_url"
@@ -128,12 +66,18 @@
                   v-on="on"
                 ></v-img>
               </template>
+
+              <!-- On click create genres parameter (since there are more than 1 genre for each item) -->
+              <!-- On click show popup -->
               <template v-slot:default="dialog">
                 <v-card>
                   <v-toolbar color="primary" dark>{{ item.title }}</v-toolbar>
 
                   <v-card-text class="card">
+                    <!-- Popup image -->
                     <img class="image2" :src="item.image_url" />
+
+                    <!-- Popup layouts for different filters (each api has different parameters) -->
                     <div v-if="filter === 'top'" class="cardText">
                       <b>Type:</b> {{ item.type }}
                       <br />
@@ -161,12 +105,13 @@
                       <br />
                       <b>Score:</b> {{ item.score }}/10
                       <br />
-                      <b @click="showGenres(item)" class="genres"></b>
+                      <b class="genres"></b>
                       <br />
                       <a :href="item.url">Read more</a>
                     </div>
                   </v-card-text>
 
+                  <!-- Close button -->
                   <v-card-actions class="justify-end">
                     <v-btn text @click="dialog.value = false">Close</v-btn>
                   </v-card-actions>
@@ -177,7 +122,6 @@
             <!-- Title breaks, fix needed --->
             <v-card-title>{{ item.title }}</v-card-title>
             <v-card-subtitle>{{ item.score }}/10</v-card-subtitle>
-
             <!-- 
                     <button @click="makeFavorite">
                             {{ like }} 
@@ -191,6 +135,7 @@
 
 
 <script>
+//import "material-design-icons-iconfont/dist/material-design-icons.css"; // importing because with CLI no default HTML in /src
 import axiosMixin from "../mixins/axiosMixin";
 import animePathsMixin from "../mixins/animePathsMixin";
 export default {
@@ -198,11 +143,11 @@ export default {
   mixins: [axiosMixin, animePathsMixin],
   data() {
     return {
-      table: [], // the array where the data is stored
+      table: [], // data from api
       like: "LIKE",
-      type: null,
-      filter: null,
-      page: 1,
+      type: null, // anime or manga
+      filter: null, // top or genre
+      page: 1, // start at first page
     };
   },
   methods: {
@@ -217,30 +162,29 @@ export default {
     changeType(type) {
       this.type = type;
     },
+    //Checks if current filter if genres, creates a string of genres for selected item, add text with innerHTML
     showGenres(item) {
-      let string = "Genres: ";
-      for (let i = 0; i < item.genres.length; i++) {
-        string +=
-          '<a href="' +
-          item.genres[i].url +
-          '">' +
-          item.genres[i].name +
-          " </a>";
-      }
-      setTimeout(() => {
-        let genreshow = document.getElementsByClassName("genres");
-        for (let i = 0; i < genreshow.length; i++) {
-          if (genreshow[i]) {
+      if (this.filter === "genre") {
+        let string = "Genres: ";
+        for (let i = 0; i < item.genres.length; i++) {
+          string +=
+            '<a href="' +
+            item.genres[i].url +
+            '">' +
+            item.genres[i].name +
+            " </a>";
+        }
+        setTimeout(() => {
+          let genreshow = document.getElementsByClassName("genres");
+          for (let i = 0; i < genreshow.length; i++) {
             genreshow[i].innerHTML = string;
           }
-        }
-      }, 1);
+        }, 1);
+      }
     },
   },
 };
 </script>
-
-
 
 <style>
 .image {
@@ -266,5 +210,109 @@ export default {
 .cardText {
   padding-top: 8px;
   text-align: left;
+}
+
+:root {
+	--color-red: rgb(129, 23, 23);
+	--color-red-hover:  rgb(95, 13, 13);
+}
+nav {
+  margin-bottom: 50px;
+}
+.nav-tab {
+  background: var(--color-red);
+}
+.nav-tab:hover {
+  background: var(--color-red-hover);
+}
+.nav-tab:active {
+  background: seashell;
+}
+#app {
+  font-family: Nunito, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+v-app-bar {
+  border: 0px solid black;
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style-type: none;  
+}
+body {
+    font-family: sans-serif;
+    background-color: #2b2b2b;
+    color: white;
+}
+div>h2:first-child {
+    margin-top: 40px;
+}
+h2 {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  margin-bottom: 0px;
+}
+h2:nth-of-type(2) {
+  font-size: 1.8em;
+}
+h2:nth-of-type(3) {
+  font-size: 2.1em;
+  margin-bottom: 25px;
+}
+h3 {
+  margin-bottom: 10px;  
+}
+/**has to be made true only for bigger screens */
+.selection__type {
+  margin: 10px auto;
+  padding: 2em;
+  width: 60%;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+.selection__type--general {
+  background-color: rgb(119, 119, 119);
+}
+.selection__type--genre {
+  background-color: rgb(71, 71, 71);
+}
+.selection__instructions {
+  color:rgb(119, 119, 119)
+}
+.btn {
+    background: white;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 20px; 
+    margin: 1%;
+}
+.btn:hover {
+  background-color: var(--color-red);
+}
+.btn--general {
+  background: rgb(88, 88, 88);
+  color: white;
+}
+.btn--genre {
+  background: rgb(49, 49, 49);
+  color: white;
+}
+.btn--miyazaki {
+  background-image: url('../assets/totoro.jpg');
+  background-size: 100px 50px;
+  text-shadow: 1px 1px 2px black;
+}
+.btn--miyazaki:hover {
+  opacity: 0.65;
+}
+footer {
+  margin-top: 5%;
+}
+.breakWord {
+  word-break: break-word;
+  -webkit-line-clamp: unset !important;
+  white-space: normal;
 }
 </style>
