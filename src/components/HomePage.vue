@@ -23,9 +23,9 @@
     <br />
     <br />
 
-    <v-btn color="#9FA8DA" @click="fetchmanga()"> Mangas List </v-btn>
+    <v-btn color="#9FA8DA" @click="fetchmanga()"> Character List </v-btn>
 
-    <v-btn color="#90CAF9" @click="fetchmanga()"> Animes List </v-btn>
+    <v-btn color="#90CAF9" @click="fetchanime()"> Animes List </v-btn>
 
     <v-simple-table>
       <template v-slot:default>
@@ -86,6 +86,18 @@ export default {
         const response = await axios.get(
           "https://api.jikan.moe/v3/manga/1/characters"
         );
+        console.log(response);
+        this.characters = response.data.characters;
+      } catch (e) {
+        console.log("error:", e);
+      }
+    },
+    async fetchanime() {
+      try {
+        const axios = require("axios");
+        const response = await axios.get(
+          "https://api.jikan.moe/v3/genre/anime/1"
+          );
         console.log(response);
         this.characters = response.data.characters;
       } catch (e) {
