@@ -4,38 +4,38 @@
     <h2>BROWSE OUR CATALOG</h2>
     <h2>MARK YOUR FAVORITES MANGAS</h2>
     <h2>PREPARE AND EXPORT YOUR READING LIST</h2>
+
     <p class="selection__instructions">
       Click to display the corresponding titles.
     </p>
 
     <div class="selection__type selection__type--general">
-      <button
-        class="btn btn--general"
-        @click="(type = 'anime'), show(filter, type, genre, page)"
-      >
+      <button class="btn btn--general" @click="(type = 'anime'), (table = [])">
         Anime
       </button>
-      <button
-        class="btn btn--general"
-        @click="(type = 'manga'), show(filter, type, genre, page)"
-      >
+      <button class="btn btn--general" @click="(type = 'manga'), (table = [])">
         Manga
       </button>
     </div>
 
     <!-- Hidden if didnt chose anime or manga -->
-    <!-- LOOP NEEDED -->
     <div
       v-if="type === 'anime'"
       class="selection__type selection__type--general"
     >
+      <h3>SELECTION BY POPULARITY</h3>
       <!-- Buttons which offset the function to display corresponding items fetched from the API -->
       <!-- Pass 4 parameters in function show() to create API url.  -->
       <!-- Change variable "filter" for popup parameters -->
       <button
         v-for="(item, index) in anime_subtype"
         :key="index"
-        @click="(filter = 'top'), (top = item.url), show(filter, type, 1, top)"
+        @click="
+          (filter = 'top'),
+            (top = item.url),
+            (genre = null),
+            show(filter, type, 1, top)
+        "
         class="btn btn--general"
       >
         {{ item.name }}
@@ -49,7 +49,7 @@
       <button
         v-for="(item, index) in manga_subtype"
         :key="index"
-        @click="(filter = 'top'), (top = item.url), show(filter, type, 1, top)"
+        @click="showTop(item)"
         class="btn btn--general"
       >
         {{ item.name }}
@@ -60,12 +60,39 @@
     <div v-if="type !== null" class="selection__type selection__type--genre">
       <h3>SELECTION BY GENRE</h3>
       <button
-        @click="(filter = 'genre'), (genre = 1), show(filter, type, genre, 1)"
+        v-for="(item, index) in genres"
+        :key="index"
+        @click="showGenre(index)"
         class="btn btn--genre"
       >
-        Action
+        {{ item }}
       </button>
     </div>
+
+    <v-form
+      v-if="type !== null"
+      data-app
+      class="selection__type selection__type--genre"
+    >
+      <v-container>
+        <v-text-field
+          v-model="message"
+          clearable
+          label="What are you looking for?"
+          type="text"
+        >
+          <template v-slot:append>
+            <v-btn @click="showSearch(message)"> SEARCH </v-btn>
+          </template>
+        </v-text-field>
+      </v-container>
+    </v-form>
+
+    <!-- Current search settings -->
+    <p v-if="filter !== null" style="font-size: 50px">
+      {{ type }} / {{ filter }} / {{ genres[genre - 1] }} {{ top }}
+      {{ search }} / Page :{{ page }}
+    </p>
 
     <!-- Generation of a grid of cards when pressing any button -->
     <v-row>
@@ -74,7 +101,7 @@
         xs="12"
         sm="6"
         md="4"
-        lg="3"
+        lg="2"
         v-for="(item, i) in table"
         :key="i"
       >
@@ -86,7 +113,7 @@
                 :src="item.image_url"
                 @click="showGenres(item)"
                 alt="item.title"
-                height="250px"
+                height="200px"
                 v-bind="attrs"
                 v-on="on"
               ></v-img>
@@ -119,7 +146,10 @@
                     <a :href="item.url">Read more</a>
                   </div>
 
-                  <div v-if="filter === 'genre'" class="cardText">
+                  <div
+                    v-if="filter === 'genre' || filter === 'search'"
+                    class="cardText"
+                  >
                     <b>Type:</b> {{ item.type }}
                     <br />
                     <b>Episodes:</b> {{ item.episodes }}
@@ -158,7 +188,7 @@
 
     <!-- Page buttons -->
     <div
-      v-if="filter === 'genre'"
+      v-if="filter === 'genre' || filter === 'search'"
       class="selection__type selection__type--general"
     >
       <button
@@ -199,12 +229,13 @@ export default {
   data() {
     return {
       table: [], // data from api
-      like: "LIKE",
+      like: "LIKE", //?
       type: null, // anime or manga
       filter: null, // top or genre
       page: 1, // start at first page
       top: null, // parameter for filter top
       genre: null, // parameter for filter genre
+      search: null,
     };
   },
   methods: {
@@ -212,15 +243,34 @@ export default {
       console.log("New favorite added");
       this.like = "LIKED";
     },
-    showDialog() {
-      console.log(this.genres[0]);
-    },
-    hideDialog() {},
-    changeType(type) {
-      this.type = type;
+
+    //Clear filter, make a new one and launch function show
+    showSearch(message) {
+      this.top = null;
+      this.genre = null;
+      this.search = message;
+      this.filter = "search";
+      this.show(this.filter, this.type, this.search, 1);
     },
 
-    //Checks if current filter if genres, creates a string of genres for selected item, add text with innerHTML
+    // same^^
+    showGenre(index) {
+      (this.top = null), (this.search = null);
+      (this.genre = index + 1),
+        (this.filter = "genre"),
+        this.show(this.filter, this.type, this.genre, 1);
+    },
+
+    // same^^
+    showTop(item) {
+      this.search = null;
+      this.genre = null;
+      (this.top = item.url),
+        (this.filter = "top"),
+        this.show(this.filter, this.type, 1, this.top);
+    },
+
+    //Checks if current filter is genres, creates a string of genres for selected item, add text with innerHTML
     showGenres(item) {
       if (this.filter === "genre") {
         let string = "Genres: ";
