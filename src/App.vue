@@ -8,7 +8,7 @@
         <router-link tag="li" class="col nav-tab" class-active="active" to="/">Home</router-link><br>
         <router-link tag="li" class="col nav-tab" class-active="active" to="/animes">Animes</router-link>
         <router-link tag="li" class="col nav-tab" class-active="active" to="/mangas">Mangas</router-link>
-        <router-link tag="li" class="col nav-tab" class-active="active" to="/contact">Drop us a message</router-link>
+        <router-link tag="li" class="col nav-tab" class-active="active" to="/contact">Contact</router-link>
         <hr>
       </nav>
 <!-- </v-app-bar> -->

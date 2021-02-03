@@ -2,7 +2,7 @@
   
   <div id="app">
     <v-form action="#" @submit.prevent="createContact()">
-      <br/>&nbsp;<br/>
+      <br/>&nbsp;
       <div class="form-group">
         <label>Name</label>
         <v-text-field v-model="contact.name" type="text" name="name" class="form-control"/>
@@ -23,9 +23,22 @@
         <v-btn v-show="!edit" type="submit" class="btn btn-primary">New Contact</v-btn>
         <v-btn v-show="edit" type="submit" class="btn btn-primary">Update Contact</v-btn>
       </div>
-    </v-form>  
+    </v-form>
+
+<template>
+   <div>
+      <input
+         type="text"
+         ref="search"
+         v-model="location"
+      />
+   </div>
+    <br/>  
   </div>
 </template>
+
+
+
 
 <script>
   export default {
@@ -38,6 +51,7 @@
           name:'',
           email:'',
           phone:''
+          
         }
       }
     },
