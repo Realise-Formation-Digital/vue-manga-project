@@ -1,8 +1,39 @@
-import Axios from '../lib/axios.js'
-
-
 export default {
     methods: {
+    
+    //Clear filter...
+    filterReset(){
+        this.table = []
+        this.filter = null;
+        this.top = null;
+        this.genre = null;
+        this.search = null;
+        this.page = 1;
+    },
+
+    //... make a new one and launch function show
+    filterSearch(search) {
+        this.filterReset();
+        this.search = search;
+        this.filter = "search";
+        this.show(this.filter, this.type, this.search, this.page);
+      },
+  
+      // same^^
+      filterGenre(index) {
+        this.filterReset();
+        this.genre = index + 1;
+        this.filter = "genre";
+        this.show(this.filter, this.type, this.genre, this.page);
+      },
+  
+      // same^^
+      filterTop(item) {
+        this.filterReset();
+        this.top = item.url;
+        this.filter = "top";
+        this.show(this.filter, this.type, this.page, this.top);
+      },
 
         async show(filter, type, i, page) {
             try {
@@ -29,8 +60,6 @@ export default {
                 else {
                     this.table = result.data[filter]
                 }
-                console.log(this.table)
-                //  top === true ? this.result = response.data.top : this.result = response.data.anime
                 console.log("Data fetched and displayed on page");
 
             } catch (e) {

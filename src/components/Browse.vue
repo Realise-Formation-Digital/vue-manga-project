@@ -1,94 +1,104 @@
 <template>
-  <!-- Parent div of the template -->
   <v-container>
-    <h2>BROWSE OUR CATALOG</h2>
-    <h2>MARK YOUR FAVORITES MANGAS</h2>
-    <h2>PREPARE AND EXPORT YOUR READING LIST</h2>
-
-    <p class="selection__instructions">
-      Click to display the corresponding titles.
-    </p>
-
-    <div class="selection__type selection__type--general">
-      <button class="btn btn--general" @click="(type = 'anime'), (table = [])">
-        Anime
-      </button>
-      <button class="btn btn--general" @click="(type = 'manga'), (table = [])">
-        Manga
-      </button>
-    </div>
+    <!-- Start by declaring type variable -->
+    <button
+      class="btn--general btn--anime"
+      @click="filterReset(), (type = 'anime')"
+    >
+      Anime
+    </button>
+    <button
+      class="btn--general btn--manga"
+      @click="filterReset(), (type = 'manga')"
+    >
+      Manga
+    </button>
 
     <!-- Hidden if didnt chose anime or manga -->
-    <div
-      v-if="type === 'anime'"
-      class="selection__type selection__type--general"
-    >
-      <h3>SELECTION BY POPULARITY</h3>
-      <!-- Buttons which offset the function to display corresponding items fetched from the API -->
-      <!-- Pass 4 parameters in function show() to create API url.  -->
-      <!-- Change variable "filter" for popup parameters -->
-      <button
-        v-for="(item, index) in anime_subtype"
-        :key="index"
-        @click="
-          (filter = 'top'),
-            (top = item.url),
-            (genre = null),
-            show(filter, type, 1, top)
-        "
-        class="btn btn--general"
-      >
-        {{ item.name }}
-      </button>
-    </div>
+    <v-container class="grey lighten-5">
+      <v-row>
+        <v-col>
+          <div
+            v-if="type === 'anime'"
+            class="selection__type selection__type--genre"
+          >
+            <h3>SORT BY POPULARITY</h3>
+            <v-divider class="divide"></v-divider>
+            <!-- Buttons which offset the function to display corresponding items fetched from the API -->
+            <!-- Pass 4 parameters in function show() to create API url.  -->
+            <!-- Change variable "filter" for popup parameters -->
+            <button
+              v-for="(item, index) in anime_subtype"
+              :key="index"
+              @click="filterTop(item)"
+              class="btn btn--genre"
+            >
+              {{ item.name }}
+            </button>
+          </div>
 
-    <div
-      v-if="type === 'manga'"
-      class="selection__type selection__type--general"
-    >
-      <button
-        v-for="(item, index) in manga_subtype"
-        :key="index"
-        @click="showTop(item)"
-        class="btn btn--general"
-      >
-        {{ item.name }}
-      </button>
-    </div>
+          <div
+            v-if="type === 'manga'"
+            class="selection__type selection__type--genre"
+          >
+            <h3>SORT BY POPULARITY</h3>
+            <v-divider class="divide"></v-divider>
+            <button
+              v-for="(item, index) in manga_subtype"
+              :key="index"
+              @click="filterTop(item)"
+              class="btn btn--genre"
+            >
+              {{ item.name }}
+            </button>
+          </div>
+        </v-col>
+        <v-col>
+          <!-- Same as above but for genres selection -->
+          <div
+            v-if="type !== null"
+            class="selection__type selection__type--genre"
+          >
+            <h3>GENRE</h3>
+            <v-divider class="divide"></v-divider>
+            <button
+              v-for="(item, index) in genres"
+              :key="index"
+              @click="filterGenre(index)"
+              class="btn btn--genre"
+            >
+              {{ item }}
+            </button>
+          </div>
+        </v-col>
+        <v-col>
+          <v-form
+            v-if="type !== null"
+            data-app
+            class="selection__type selection__type--genre"
+          >
+            <h3>SEARCH</h3>
+            <v-divider class="divide"></v-divider>
+            <v-container>
+              <v-text-field
+                v-model="search"
+                label="What are you looking for?"
+                type="text"
+                @keydown.enter="filterSearch(search)"
+              >
+                <template v-slot:append>
+                  <v-btn class="btn btn--genre" @click="filterSearch(search)">
+                    GO
+                  </v-btn>
+                </template>
+              </v-text-field>
+            </v-container>
+          </v-form>
+        </v-col>
+      </v-row>
+    </v-container>
 
-    <!-- Same as above but for genres selection -->
-    <div v-if="type !== null" class="selection__type selection__type--genre">
-      <h3>SELECTION BY GENRE</h3>
-      <button
-        v-for="(item, index) in genres"
-        :key="index"
-        @click="showGenre(index)"
-        class="btn btn--genre"
-      >
-        {{ item }}
-      </button>
-    </div>
-
-    <v-form
-      v-if="type !== null"
-      data-app
-      class="selection__type selection__type--genre"
-    >
-      <v-container>
-        <v-text-field
-          v-model="message"
-          clearable
-          label="What are you looking for?"
-          type="text"
-        >
-          <template v-slot:append>
-            <v-btn @click="showSearch(message)"> SEARCH </v-btn>
-          </template>
-        </v-text-field>
-      </v-container>
-    </v-form>
-
-    <!-- Current search settings -->
+    <!-- Current filter settings -->
     <p v-if="filter !== null" style="font-size: 50px">
       {{ type }} / {{ filter }} / {{ genres[genre - 1] }} {{ top }}
       {{ search }} / Page :{{ page }}
@@ -189,26 +199,23 @@
     <!-- Page buttons -->
     <div
       v-if="filter === 'genre' || filter === 'search'"
-      class="selection__type selection__type--general"
+      class="selection__type selection__type--genre"
     >
       <button
-        v-for="n in 25"
+        v-for="n in 30"
         :key="n"
-        class="btn btn--general"
+        class="btn btn--genre"
         @click="(page = n), show(filter, type, genre, page)"
       >
         {{ n }}
       </button>
     </div>
 
-    <div
-      v-if="filter === 'top'"
-      class="selection__type selection__type--general"
-    >
+    <div v-if="filter === 'top'" class="selection__type selection__type--genre">
       <button
-        v-for="n in 25"
+        v-for="n in 30"
         :key="n"
-        class="btn btn--general"
+        class="btn btn--genre"
         @click="(page = n), show(filter, type, page, top)"
       >
         {{ n }}
@@ -217,9 +224,8 @@
   </v-container>
 </template>
 
-
 <script>
-import "material-design-icons-iconfont/dist/material-design-icons.css"; // importing because with CLI no default HTML in /src
+import "material-design-icons-iconfont/dist/material-design-icons.css";
 import axiosMixin from "../mixins/axiosMixin";
 import animePathsMixin from "../mixins/animePathsMixin";
 
@@ -229,47 +235,15 @@ export default {
   data() {
     return {
       table: [], // data from api
-      like: "LIKE", //?
       type: null, // anime or manga
-      filter: null, // top or genre
+      filter: null, // top or genre or search
       page: 1, // start at first page
-      top: null, // parameter for filter top
-      genre: null, // parameter for filter genre
-      search: null,
+      top: null, // string for filter top
+      genre: null, // number for filter genre
+      search: null, // string from search bar for filter search
     };
   },
   methods: {
-    makeFavorite() {
-      console.log("New favorite added");
-      this.like = "LIKED";
-    },
-
-    //Clear filter, make a new one and launch function show
-    showSearch(message) {
-      this.top = null;
-      this.genre = null;
-      this.search = message;
-      this.filter = "search";
-      this.show(this.filter, this.type, this.search, 1);
-    },
-
-    // same^^
-    showGenre(index) {
-      (this.top = null), (this.search = null);
-      (this.genre = index + 1),
-        (this.filter = "genre"),
-        this.show(this.filter, this.type, this.genre, 1);
-    },
-
-    // same^^
-    showTop(item) {
-      this.search = null;
-      this.genre = null;
-      (this.top = item.url),
-        (this.filter = "top"),
-        this.show(this.filter, this.type, 1, this.top);
-    },
-
     //Checks if current filter is genres, creates a string of genres for selected item, add text with innerHTML
     showGenres(item) {
       if (this.filter === "genre") {
@@ -282,6 +256,7 @@ export default {
             item.genres[i].name +
             " </a>";
         }
+        //Timeout because we need to create element and THEN do getElement...
         setTimeout(() => {
           let genreshow = document.getElementsByClassName("genres");
           for (let i = 0; i < genreshow.length; i++) {
