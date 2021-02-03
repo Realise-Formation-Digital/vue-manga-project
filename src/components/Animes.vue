@@ -9,23 +9,50 @@
     </p>
 
     <div class="selection__type selection__type--general">
-      <button class="btn btn--general" @click="type = 'anime'">Anime</button>
-      <button class="btn btn--general" @click="type = 'manga'">Manga</button>
+      <button
+        class="btn btn--general"
+        @click="(type = 'anime'), show(filter, type, genre, page)"
+      >
+        Anime
+      </button>
+      <button
+        class="btn btn--general"
+        @click="(type = 'manga'), show(filter, type, genre, page)"
+      >
+        Manga
+      </button>
     </div>
 
     <!-- Hidden if didnt chose anime or manga -->
     <!-- LOOP NEEDED -->
-    <div v-if="type !== null" class="selection__type selection__type--general">
+    <div
+      v-if="type === 'anime'"
+      class="selection__type selection__type--general"
+    >
       <!-- Buttons which offset the function to display corresponding items fetched from the API -->
       <!-- Pass 4 parameters in function show() to create API url.  -->
       <!-- Change variable "filter" for popup parameters -->
       <button
-        @click="
-          (filter = 'top'), (top = 'bypopularity'), show(filter, type, 1, top)
-        "
+        v-for="(item, index) in anime_subtype"
+        :key="index"
+        @click="(filter = 'top'), (top = item.url), show(filter, type, 1, top)"
         class="btn btn--general"
       >
-        Popular
+        {{ item.name }}
+      </button>
+    </div>
+
+    <div
+      v-if="type === 'manga'"
+      class="selection__type selection__type--general"
+    >
+      <button
+        v-for="(item, index) in manga_subtype"
+        :key="index"
+        @click="(filter = 'top'), (top = item.url), show(filter, type, 1, top)"
+        class="btn btn--general"
+      >
+        {{ item.name }}
       </button>
     </div>
 

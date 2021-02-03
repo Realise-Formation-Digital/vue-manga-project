@@ -6,36 +6,37 @@ export default {
 
         async show(filter, type, i, page) {
             try {
-                //Create API url
-                const url = "https://api.jikan.moe/v3/" + filter + "/" + type + "/" + i + "/" + page
-                //Connect to API
-                const axios = require('axios')
-                //Wait the response and pass the url
-                const result = await axios.get(url)
+                if (type !== null && filter !== null) {
+                    //Create API url
+                    const url = "https://api.jikan.moe/v3/" + filter + "/" + type + "/" + i + "/" + page
+                    //Connect to API
+                    const axios = require('axios')
+                    //Wait the response and pass the url
+                    const result = await axios.get(url)
 
-                /*    WORK IN PROGRESS
-                let resultPretty = []
-                if (result.status !== 200) throw new Error("Data not found")
-                   result.anime.map((anime) => {
-                       let objectToPush = {
-                           Title: anime.title,
-                           description: anime.synopsys || null,
-                           image: anime.image_url
-                       }
-       
-                       resultPretty.push(objectToPush)
-                   }) */
+                    /*    WORK IN PROGRESS
+                    let resultPretty = []
+                    if (result.status !== 200) throw new Error("Data not found")
+                       result.anime.map((anime) => {
+                           let objectToPush = {
+                               Title: anime.title,
+                               description: anime.synopsys || null,
+                               image: anime.image_url
+                           }
+           
+                           resultPretty.push(objectToPush)
+                       }) */
 
 
 
-                //Pass result from API into table
-                if (filter === 'genre') {
-                    this.table = result.data[type]
-                } else { this.table = result.data[filter] }
-                console.log(this.table)
-                //  top === true ? this.result = response.data.top : this.result = response.data.anime
-                console.log("Data fetched and displayed on page");
-
+                    //Pass result from API into table
+                    if (filter === 'genre') {
+                        this.table = result.data[type]
+                    } else { this.table = result.data[filter] }
+                    console.log(this.table)
+                    //  top === true ? this.result = response.data.top : this.result = response.data.anime
+                    console.log("Data fetched and displayed on page");
+                }
             } catch (e) {
                 console.error(e)
             }
