@@ -1,25 +1,75 @@
 export default {
     data() {
         return {
-            categories: [ 
-                { 
-                    name: 'Popular',
-                    url: 'https://api.jikan.moe/v3/top/anime/1/bypopularity'
-                },
+            anime_subtype: [ 
                 {
-                    name: "Community's favourite",
-                    url: 'https://api.jikan.moe/v3/top/anime/1/favorite'
+                    name: "Airing",
+                    url: "airing"
                 },
                 {
                     name: 'Upcoming',
-                    url: 'https://api.jikan.moe/v3/top/anime/1/upcoming'
-                }
+                    url: 'upcoming'
+                },
+                {
+                    name: "TV",
+                    url: "tv"
+                },
+                {
+                    name: "Movie",
+                    url: "movie"
+                },
+                {
+                    name: "OVA",
+                    url: "ova"
+                },
+                {
+                    name: "Special",
+                    url: "special"
+                },
+                { 
+                    name: 'Popular',
+                    url: 'bypopularity'
+                },
+                {
+                    name: "Community's favourite",
+                    url: 'favorite'
+                },
+            ],
+
+            manga_subtype: [
+                {
+                    name: "Manga",
+                    url: "manga"
+                },
+                {
+                    name: 'Novels',
+                    url: 'novels'
+                },
+                {
+                    name: "Oneshots",
+                    url: "oneshots"
+                },
+                {
+                    name: "Doujin",
+                    url: "doujin"
+                },
+                {
+                    name: "Manhwa",
+                    url: "manhwa"
+                },
+                {
+                    name: "Manhua",
+                    url: "manhua"
+                },
+                { 
+                    name: 'Popular',
+                    url: 'bypopularity'
+                },
+                {
+                    name: "Community's favourite",
+                    url: 'favorite'
+                },
             ]
         }  
     },
-    methods: {
-        hello() {
-            console.log("Hello and good job")
-        }
-    }
 }
