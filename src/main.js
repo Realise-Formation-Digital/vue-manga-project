@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from '@/plugins/vuetify.js' // path to vuetify export
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+//import axios from 'axios'
+//import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
 
@@ -31,11 +31,8 @@ const router = new VueRouter({
 
 
 new Vue({
-  // root node
-  el: "#app",
-  axios,
-  VueAxios,
-  router,
+
+  router: router,
   render: h => h(App),
   vuetify
 }).$mount('#app');

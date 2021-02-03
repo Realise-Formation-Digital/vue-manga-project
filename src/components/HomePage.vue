@@ -23,10 +23,13 @@
     <br />
     <br />
 
-    <div>
-      <iframe src="https://api.jikan.moe/v3/anime/1" width="1450"></iframe>
-    </div>
-    
+     <v-btn
+      color="#F44336"
+      @click="fetchmanga()"
+    >
+      Primary
+    </v-btn>
+   
 
 
     <br />
@@ -54,6 +57,18 @@ export default {
       ],
     };
   },
+  methods: {
+    async fetchmanga(){
+      try{
+        const axios = require('axios')
+        const response = await axios.get('https://api.jikan.moe/v3/manga/1/characters');
+        console.log(response);
+
+      }catch(e){
+        console.log("error:",e)
+      }
+    }
+  }
 };
 </script>
 
