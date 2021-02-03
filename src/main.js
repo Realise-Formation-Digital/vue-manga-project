@@ -13,13 +13,13 @@ Vue.use(VueRouter)
 import HomePage from './components/HomePage.vue'
 import AboutUs from './components/AboutUs.vue'
 import Footer from './components/Footer.vue'
-import Animes from './components/Animes.vue'
+
 
 const routes = [
   { path: '/', component: HomePage },
   { path: '/aboutus', component: AboutUs },
   { path: '/footer', component: Footer },
-  { path: '/animes', component: Animes }
+
 ]
 
 const router = new VueRouter({
