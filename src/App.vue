@@ -1,41 +1,59 @@
 <template>
   <div id="app">
-    <img src="./assets/animania.png" alt="Header with pictures of characters from animes and mangas" style="width: 100%">
+    <img
+      src="./assets/animania.png"
+      alt="Header with pictures of characters from animes and mangas"
+      style="width: 100%"
+    />
 
-      <!-- Nav menu with router-links -->
-<!-- <v-app-bar fixed> -->
-      <nav class="navbar navbar-expand-lg fixed-top row nav-tab">
-        <router-link tag="li" class="col nav-tab" class-active="active" to="/">Home</router-link><br>
-        <router-link tag="li" class="col nav-tab" class-active="active" to="/animes">Animes</router-link>
-        <router-link tag="li" class="col nav-tab" class-active="active" to="/contact">Drop us a message</router-link>
-        <hr>
-      </nav>
-<!-- </v-app-bar> -->
+    <!-- Nav menu with router-links -->
+    <!-- <v-app-bar fixed> -->
+    <nav class="navbar navbar-expand-lg fixed-top row nav-tab">
+      <router-link tag="li" class="col nav-tab" class-active="active" to="/"
+        >Home</router-link
+      ><br />
+      <router-link
+        tag="li"
+        class="col nav-tab"
+        class-active="active"
+        to="/browse"
+        >Browse</router-link
+      >
+      <router-link
+        tag="li"
+        class="col nav-tab"
+        class-active="active"
+        to="/contact"
+        >Drop us a message</router-link
+      >
+      <hr />
+    </nav>
+    <!-- </v-app-bar> -->
 
-      <!-- Components (pages) displayed here -->
-      <router-view></router-view>
+    <!-- Components (pages) displayed here -->
+    <router-view></router-view>
 
-      <!-- Footer goes here -->
-      <Footer></Footer>
+    <!-- Footer goes here -->
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Footer from './components/Footer.vue'
+import Footer from "./components/Footer.vue";
 /* import HelloWorld from './components/HelloWorld.vue' */
 export default {
-  name: 'App',
+  name: "App",
   components: {
-     /* HelloWorld */
-     Footer
-    }
-}
+    /* HelloWorld */
+    Footer,
+  },
+};
 </script>
 
 <style>
 :root {
-	--color-red: rgb(129, 23, 23);
-	--color-red-hover:  rgb(95, 13, 13);
+  --color-red: rgb(129, 23, 23);
+  --color-red-hover: rgb(95, 13, 13);
 }
 
 nav {
@@ -48,6 +66,7 @@ nav {
 
 .nav-tab:hover {
   background: var(--color-red-hover);
+  cursor: pointer;
 }
 
 .nav-tab:active {
@@ -68,18 +87,17 @@ v-app-bar {
 }
 
 li {
-  list-style-type: none;  
+  list-style-type: none;
 }
-
 
 body {
-    font-family: sans-serif;
-    background-color: #2b2b2b;
-    color: white;
+  font-family: sans-serif;
+  background-color: #2b2b2b;
+  color: white;
 }
 
-div>h2:first-child {
-    margin-top: 40px;
+div > h2:first-child {
+  margin-top: 40px;
 }
 
 h2 {
@@ -96,17 +114,16 @@ h2:nth-of-type(3) {
   margin-bottom: 25px;
 }
 
-h3 {
-  margin-bottom: 10px;  
+.divide {
+  margin: 8px 20px 15px 10px;
 }
 
 /**has to be made true only for bigger screens */
 .selection__type {
-  margin: 10px auto;
+  margin: 20px auto;
   padding: 2em;
-  width: 60%;
-  border-radius: 50px;
   margin-bottom: 20px;
+  border: 1px solid black;
 }
 
 .selection__type--general {
@@ -118,44 +135,52 @@ h3 {
 }
 
 .selection__instructions {
-  color:rgb(119, 119, 119)
+  color: rgb(119, 119, 119);
 }
 
 .btn {
-    background: white;
-    color: black;
-    padding: 10px 20px;
-    border-radius: 20px; 
-    margin: 1%;
+  background: white;
+  color: black ;
+  padding: 10px 20px ;
+  border-radius: 10px !important;
+  margin: 1% !important;
 }
 
 .btn:hover {
-  background-color: var(--color-red);
+  background-color: var(--color-red) !important;
 }
 
 .btn--general {
-  background: rgb(88, 88, 88);
+  margin-top: 30px;
+  padding: 15px 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-shadow: 2px 2px 2px black;
   color: white;
+  font-size: 60px;
+  border: 1px solid black
 }
 
 .btn--genre {
-  background: rgb(49, 49, 49);
-  color: white;
+  background: rgb(49, 49, 49) !important;
+  color: white !important;
+  
 }
 
-.btn--miyazaki {
-  background-image: url('./assets/totoro.jpg');
-  background-size: 100px 50px;
-  text-shadow: 1px 1px 2px black;
+.btn--manga {
+  background-image: url("./assets/totoro.jpg");
 }
 
-.btn--miyazaki:hover {
+.btn--anime {
+  background-image: url("./assets/death.jpg");
+}
+
+.btn--general:hover {
   opacity: 0.65;
 }
 
-
 footer {
-  margin-top: 5%;
+  margin-top: 3%;
 }
 
 .breakWord {

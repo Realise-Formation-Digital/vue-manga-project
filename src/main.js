@@ -6,7 +6,7 @@ import VueRouter from 'vue-router'
 // import Footer from '@components/Footer'.vue
 
 // Importing pages
-import Animes from '@/components/Animes'
+import Browse from '@/components/Browse'
 import Home from '@/components/Home'
 import Contact from '@/components/Contact'
 import axios from 'axios'
@@ -24,8 +24,8 @@ const routes = [
     component: Home
   },
   {
-    path: '/animes',
-    component: Animes
+    path: '/browse',
+    component: Browse
   },
   { 
     path: '/contact',
