@@ -23,7 +23,11 @@
     <br />
     <br />
 
-    <v-btn color="#9FA8DA" @click="fetchmanga()"> Character List </v-btn>
+    <v-btn color="#9FA8DA" @click="fetchmanga()"> Character List 
+
+
+      
+    </v-btn>
 
     <v-btn color="#90CAF9" @click="fetchanime()"> Animes List </v-btn>
 
@@ -107,5 +111,3 @@ export default {
   },
 };
 </script>
-
-
