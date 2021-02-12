@@ -2,6 +2,7 @@
   <v-footer color="primary lighten-1" padless>
     <v-row justify="center" no-gutters>
       <v-btn class="ma-2" color="000" router-link to="/">Home Page</v-btn>
+      <v-btn class="ma-2" color="000" router-link to ="/beer">Have a Beer</v-btn>
       <v-btn class="ma-2" color="000" router-link to="/aboutus">About Us</v-btn>
     </v-row>
 

@@ -13,12 +13,14 @@ Vue.use(VueRouter)
 import HomePage from './components/HomePage.vue'
 import AboutUs from './components/AboutUs.vue'
 import Footer from './components/Footer.vue'
+import Beer from './components/Beer.vue'
 
 
 const routes = [
   { path: '/', component: HomePage },
   { path: '/aboutus', component: AboutUs },
   { path: '/footer', component: Footer },
+  { path: '/beer', component: Beer },
 
 ]
 
